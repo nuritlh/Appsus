@@ -1,0 +1,46 @@
+/*----------------email-------------------------*/
+.email-app {
+  margin: 10px;
+}
+/*----------------filter------------------------*/
+.input-search {
+  width: 80%;
+}
+
+/*-------------pre-email-----------------------*/
+
+.pre-email {
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+}
+.pre-email h4,
+.pre-email p {
+  margin: 5px;
+}
+.pre-email h4 {
+  width: 15%;
+}
+.pre-email p {
+  width: 85%;
+}
+.pre-email p span {
+  font-size: 12px;
+}
+
+/*------------------email-details---------------------*/
+.email-details {
+  margin: 10px;
+}
+.email-details p {
+  border-bottom: 1px solid gray;
+}
+.email-details p span {
+  font-size: 12px;
+}
+.email-details img {
+  width: 50%;
+  margin: 10px 25%;
+}
+.email-details p > .dateSent {
+  float: right;
+}
