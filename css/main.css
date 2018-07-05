@@ -1,5 +1,4 @@
-@import 'kepper.css';
-@import 'email.css';
+
 *{box-sizing: border-box;
 
 }
@@ -80,12 +79,15 @@ a {
 /* --------------------helper end---------------- */
 
 nav {
-
+    
     background-image: url("../img/home_background.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 200px;
+  
 }
+
+
 nav div {
     padding: 10px;
 }
