@@ -4,46 +4,58 @@ import kepperService from '../../service/kepper-service.js'
 const txtTypt = 'note-prev-img';
 
 export default {
-    template:`
-    <section>
-        <div>
-            sfdsfs
-        </div>
- <form class="form-upload" action="#">
+    template: `
+    <section class="flex justify-center">
+        <div class="note-img flex-col align-center">
+        <img class="note-img-item" :src="data.url">
+    <!-- <form class="form-upload" action="#">
       <div class="input-file-container">
-   
+        
          <input class="input-file" type="file" name="image" @change="onFileInputChange($event)" />
          <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
         </div>
-</form>
+        </form> -->
 
-        <input  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
-        <button @click="addImgNote">add</button>
+        <input class="note-img-item"  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
+        <button  :class="[isEdit?'far fa-save':'fas fa-plus-circle']" 
+        class="note-img-item" @click="addImgNote"></button>
         </div>
     </section>
     
     `,
     data() {
         return {
-            data:{
-                titelNote:'',
-                url:'img/kepper/Buttercup_pic.jpg'
-            }
+            data: {
+                titelNote: '',
+                url: 'img/kepper/Buttercup_pic.jpg'
+            },
+            isEdit:false,
         }
     },
-    methods:{
-        onFileInputChange(ev){
-            debugger
+    mounted(){
+        var noteId  = this.$route.params.textNoteId
+        if(noteId) {
+            kepperService.findNoteById(noteId)
+           .then(note=>{
+            // this.noteEdit = note
+             this.isEdit = !this.isEdit
+               this.data.titelNote = note.data.titelNote 
+               this.data.url = note.data.url 
+           })
+         }
+    },
+    methods: {
+        onFileInputChange(ev) {
             uploadService.handleImageFromInput(ev)
         },
-        addImgNote(){
+        addImgNote() {
             var note = this.data;
-            
-            if(this.data.titelNote !== '' || this.data.url !== '' ){
-                kepperService.addNote(txtTypt,note)
-                .then(()=>{
-                    console.log('note txt added')
-                })
+
+            if (this.data.titelNote !== '' || this.data.url !== '') {
+                kepperService.addNote(txtTypt, note)
+                    .then(() => {
+                        swal("your note added to the list");
+                    })
             }
         }
     }

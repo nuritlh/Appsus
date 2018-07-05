@@ -9,11 +9,11 @@ export default {
         <div class="flex-col">
         <input class="note-txt-item"  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
        
-        <textArea class="note-txt-item" v-model="data.noteTxt" placeholder="Your note">
-        </textArea>
-        <button @click="addTxtNote">
-            add
+        <input class="note-txt-item" type="text" v-model="data.noteTxt" placeholder="Your note">
+</input>
+        <button :class="[isEdit?'far fa-save':'fas fa-plus-circle']" @click="addTxtNote">
         </button>
+        
         </div>
     </section>
     `
@@ -22,25 +22,46 @@ export default {
         return {
             data:{
                 titelNote:'',
-                noteTxt:''
-            }
+                noteTxt:'',
+                id:null
+                
+            },
+            noteEdit:null,
+            isEdit:false,
+            noteId:this.$route.params.textNoteId
            
         }
     },
     craeted() {
-            if(this.dataNote.titelNote !=='' || this.dataNote.noteTxt !== ''){
-                this.data.noteTxt = this.dataNote.noteTxt
-                this.data.titelNote = this.dataNote.titelNote
-            }
+            console.log('idd',this.$route.params.textNoteId)
+            
+    },
+    mounted(){
+        var noteId  = this.$route.params.textNoteId
+        if(noteId) {
+           kepperService.findNoteById(noteId)
+          .then(note=>{
+              this.noteEdit = note
+            this.isEdit = !this.isEdit
+              this.data.titelNote = note.data.titelNote 
+              this.data.noteTxt = note.data.noteTxt 
+          })
+        }
+       
+        console.log('idd',this.$route.params.textNoteId)
+        
     },
     methods :{
         addTxtNote(){
-            var note = this.data;
-            console.log(note)
+            if(this.noteEdit) {
+                this.noteEdit.data = this.data;
+            }
+
             if(this.data.titelNote !== '' || this.data.noteTxt !== '' ){
-                kepperService.addNote(txtTypt,note)
+                
+                kepperService.addNote(txtTypt,this.data,this.noteEdit)
                 .then(()=>{
-                    console.log('note txt added')
+                    swal("your note added to the list");
                 })
             }
         }
