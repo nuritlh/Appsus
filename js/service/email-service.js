@@ -280,8 +280,15 @@ function getEmailByID(emailId) {
   var email = emails.find(email => email.id === emailId);
   return Promise.resolve(email);
 }
+function deleteEmail(emailId) {
+  // getEmailByID(emailId).then(email => {
+  //   book.reviews.splice(idx, 1);
+  //   utils.saveToStorage('books', apiBooks);
+  // });
+}
 
 export default {
   query,
-  getEmailByID
+  getEmailByID,
+  deleteEmail
 };

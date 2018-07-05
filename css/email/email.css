@@ -3,10 +3,23 @@
   margin: 10px;
 }
 /*----------------filter------------------------*/
+.filter-email {
+  padding: 5px;
+}
 .input-search {
   width: 80%;
+  padding: 10px;
 }
 
+.logo {
+  background-color: #cd9f80;
+  margin: 10px;
+  padding: 10px;
+  font-weight: 600;
+  font-style: italic;
+  border-radius: 15px;
+  border: 2px solid #5183a2;
+}
 /*-------------pre-email-----------------------*/
 
 .pre-email {
@@ -25,6 +38,18 @@
 }
 .pre-email p span {
   font-size: 12px;
+}
+.pre-email-icon {
+  padding: 5px;
+  /* display: none; */
+}
+
+.back-icon:hover,
+.pre-email-icon:hover {
+  padding: 5px;
+  background-color: gray;
+  border-radius: 50%;
+  opacity: 0.3;
 }
 
 /*------------------email-details---------------------*/

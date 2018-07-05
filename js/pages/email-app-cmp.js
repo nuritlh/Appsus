@@ -6,7 +6,7 @@ export default {
   template: `
     <section class="email-app">
             <filter-email v-on:back="back"></filter-email>
-            <list-email v-if="!selectedemail" v-on:selected="selectedEmail" :mails="mails"></list-email>
+            <list-email v-if="!selectedemail" v-on:selected="selectedEmail"  v-on:deleteEmail="deleteEmail" :mails="mails"></list-email>
             <details-email v-if="selectedemail" :email="selectedemail"></details-email>    
     </section>
     `,
@@ -26,6 +26,9 @@ export default {
   methods: {
     selectedEmail(email) {
       this.selectedemail = email;
+    },
+    deleteEmail(email) {
+      console.log('deleting', email);
     },
     back() {
       this.selectedemail = null;

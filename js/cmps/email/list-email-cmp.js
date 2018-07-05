@@ -5,7 +5,7 @@ export default {
   template: `
       <section>
           <div>
-              <preview-email v-for="(mail, idx) in mails" v-on:selected="selectedEmail" :mail="mail"></preview-email>
+              <preview-email v-for="(mail, idx) in mails" v-on:selected="selectedEmail" v-on:deleteEmail="deleteEmail" :mail="mail"></preview-email>
           </div>
       </section>
       `,
@@ -14,6 +14,9 @@ export default {
     selectedEmail(email) {
       this.$emit('selected', email);
       console.log('listemail', email);
+    },
+    deleteEmail(email) {
+      this.$emit('deleteEmail', email);
     }
   }
 };
