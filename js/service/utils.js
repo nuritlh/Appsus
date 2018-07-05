@@ -6,8 +6,13 @@ function loadFromStorage(key) {
     return JSON.parse(localStorage.getItem(key))
 }
 
+function makeid(){
+  return Date.now().valueOf();
+}
+
 export default {
     loadFromStorage,
-    saveToStorage
+    saveToStorage,
+    makeid
 
 }
