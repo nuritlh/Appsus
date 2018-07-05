@@ -1,4 +1,4 @@
-
+@import './kepper/kepper.css';
 *{box-sizing: border-box;
 
 }
@@ -121,3 +121,22 @@ transition: all 0.3s;
     font-size: 1.5em;
 }
 
+/* button */
+button {
+    background-color: #96584a;
+    border: none;
+    color: #e6c5a3;
+    padding: 10px;
+    font-size: 1.1em;
+    transition: all 0.3s;
+}
+button:hover ,button:active {
+    color: #faf4eb;
+    box-shadow: 0 0 12px 0px black;
+    font-size: 1.2em;
+}
+.btn-close {
+    border-radius: 50%;
+    color: whitesmoke;
+    background-color:#e75447;
+}

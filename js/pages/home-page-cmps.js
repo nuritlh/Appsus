@@ -5,7 +5,6 @@ export default {
 
     template:`
     <section class="home-page">
-      
         <div class="flex align-center space-around">
             <div  class="route-box email-route flex align-center">
                 <router-link exact to="/emailApp">email</router-link>
