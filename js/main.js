@@ -1,3 +1,5 @@
+
+import homePage from './pages/home-page-cmps.js'
 import myRoutes from './routes.js'
 
 
@@ -8,5 +10,8 @@ const myRouter = new VueRouter({ routes: myRoutes })
 new Vue({
     router: myRouter,
     el: '#app',
+    components : {
+        homePage
+    }
  
 });
