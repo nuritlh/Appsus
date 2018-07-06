@@ -1,10 +1,10 @@
-import uploadService from '../../service/upload-service.js'
-import kepperService from '../../service/kepper-service.js'
+import uploadService from '../../service/upload-service.js';
+import kepperService from '../../service/kepper-service.js';
 
 const txtTypt = 'note-prev-img';
 
 export default {
-    template:`
+  template: `
     <section>
         <div>
             sfdsfs
@@ -23,29 +23,27 @@ export default {
     </section>
     
     `,
-    data() {
-        return {
-            data:{
-                titelNote:'',
-                url:'img/kepper/Buttercup_pic.jpg'
-            }
-        }
+  data() {
+    return {
+      data: {
+        titelNote: '',
+        url: 'img/kepper/Buttercup_pic.jpg'
+      }
+    };
+  },
+  methods: {
+    onFileInputChange(ev) {
+      // debugger
+      uploadService.handleImageFromInput(ev);
     },
-    methods:{
-        onFileInputChange(ev){
-            debugger
-            uploadService.handleImageFromInput(ev)
-        },
-        addImgNote(){
-            var note = this.data;
-            
-            if(this.data.titelNote !== '' || this.data.url !== '' ){
-                kepperService.addNote(txtTypt,note)
-                .then(()=>{
-                    console.log('note txt added')
-                })
-            }
-        }
-    }
+    addImgNote() {
+      var note = this.data;
 
-}
+      if (this.data.titelNote !== '' || this.data.url !== '') {
+        kepperService.addNote(txtTypt, note).then(() => {
+          console.log('note txt added');
+        });
+      }
+    }
+  }
+};

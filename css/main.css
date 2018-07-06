@@ -74,6 +74,9 @@ button {
 a {
   text-decoration: none;
 }
+.deplay-none {
+  display: none;
+}
 
 /* --------------------helper end---------------- */
 
@@ -86,6 +89,9 @@ nav {
   background-repeat: no-repeat;
   background-size: cover;
   height: 200px;
+}
+.nav-in-pages {
+  height: 50px;
 }
 
 nav div {
@@ -118,20 +124,21 @@ nav div a {
 
 /* button */
 button {
-    background-color: #96584a;
-    border: none;
-    color: #e6c5a3;
-    padding: 10px;
-    font-size: 1.1em;
-    transition: all 0.3s;
+  background-color: #96584a;
+  border: none;
+  color: #e6c5a3;
+  padding: 10px;
+  font-size: 1.1em;
+  transition: all 0.3s;
 }
-button:hover ,button:active {
-    color: #faf4eb;
-    box-shadow: 0 0 12px 0px black;
-    font-size: 1.2em;
+button:hover,
+button:active {
+  color: #faf4eb;
+  box-shadow: 0 0 12px 0px black;
+  font-size: 1.2em;
 }
 .btn-close {
-    border-radius: 50%;
-    color: whitesmoke;
-    background-color:#e75447;
+  border-radius: 50%;
+  color: whitesmoke;
+  background-color: #e75447;
 }

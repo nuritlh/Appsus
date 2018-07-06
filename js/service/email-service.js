@@ -258,22 +258,22 @@ var emails = [
     dateSent: '2018-06-13'
   }
 ];
+var markedEmails = [];
+function query(searchEmail) {
+  // return Promise.resolve(emails);
+  return Promise.resolve(emails).then(res => {
+    var emails = res;
+    if (!searchEmail) return emails;
+    var emails = emails.filter(email => {
+      return (
+        email.from.toLowerCase().includes(searchEmail.toLowerCase()) ||
+        email.email.toLowerCase().includes(searchEmail.toLowerCase()) ||
+        email.title.toLowerCase().includes(searchEmail.toLowerCase())
+      );
+    });
 
-function query(filter) {
-  return Promise.resolve(emails);
-  //   return Promise.resolve(emails).then(res => {
-  //     var emails = res;
-  //     if (!filter) return emails;
-  //     var emails = emails.filter(book => {
-  //       return (
-  //         book.title.indexOf(filter.name) !== -1 &&
-  //         book.listPrice.amount >= filter.fromPrice &&
-  //         book.listPrice.amount <= toprice
-  //       );
-  //     });
-
-  //     return emails;
-  //   });
+    return emails;
+  });
 }
 
 function getEmailByID(emailId) {
@@ -281,14 +281,28 @@ function getEmailByID(emailId) {
   return Promise.resolve(email);
 }
 function deleteEmail(emailId) {
-  // getEmailByID(emailId).then(email => {
-  //   book.reviews.splice(idx, 1);
-  //   utils.saveToStorage('books', apiBooks);
-  // });
+  var emailIdx = emails.findIndex(email => email.id === emailId);
+  emails.splice(emailIdx, 1);
+  return Promise.resolve('deleted!');
+}
+function addMarkedEmail(mailId) {
+  markedEmails.push(mailId);
+  console.log(markedEmails);
+}
+function deleteMarkedEmails() {
+  markedEmails.forEach(emailId => {
+    emails.forEach((email, idx) => {
+      if (emailId === email.id) {
+        emails.splice(idx, 1);
+      }
+    });
+  });
 }
 
 export default {
   query,
   getEmailByID,
-  deleteEmail
+  deleteEmail,
+  addMarkedEmail,
+  deleteMarkedEmails
 };

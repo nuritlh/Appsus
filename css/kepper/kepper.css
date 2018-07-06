@@ -1,61 +1,53 @@
-
-
 .kepper-app {
-    padding: 10px;
+  padding: 10px;
 }
 .dynamic-cmp {
-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .kepper-app ul li {
-    margin:0 10px 0 0;
-   
+  margin: 0 10px 0 0;
 }
 .btn-keep {
-    min-width: 50px;
+  min-width: 50px;
 }
 
 .dynamic-cmp-item {
-    background-color: whitesmoke;
-    box-shadow:0 0 6px black;
-    padding: 10px;
-    margin:5px;
-    transition: all 0.3s;
-    cursor: pointer;
+  background-color: whitesmoke;
+  box-shadow: 0 0 6px black;
+  padding: 10px;
+  margin: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
-.dynamic-cmp-item:hover {
-    transform: scale(1.1);
+div .dynamic-cmp-item:hover {
+  transform: scale(1.1);
 }
-
-
-
 
 /* txt */
 .preview-note-txt {
-    width: 100%;
-    margin:0 0 10px 0;
+  width: 100%;
+  margin: 0 0 10px 0;
 }
 .preview-txt {
-    width: 50%;
+  width: 50%;
 }
 
 .note-txt-item {
-    margin:0 0 10px;
-    padding: 10px;
-    border: none;
+  margin: 0 0 10px;
+  padding: 10px;
+  border: none;
 }
-
-
 
 /* img */
 
 .preview-note-img img {
-    width: 150px;
+  width: 150px;
 }
 
 /* todos */
 
 .todos-list ul {
-padding: 0;
-margin: 0;
+  padding: 0;
+  margin: 0;
 }

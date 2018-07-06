@@ -1,16 +1,13 @@
-import kepperService from '../service/kepper-service.js'
+import kepperService from '../service/kepper-service.js';
 // import noteTxt from '../cmps/keeper/note-txt-cmp.js'
 // import imgNote from '../cmps/keeper/note-img-cmp.js'
-import notePrevTxt from '../cmps/keeper/note-preview-cmp.js'
-import notePrevImg from '../cmps/keeper/note-img-preview-cmp.js'
-import noteTodos from '../cmps/keeper/todos-list-cmp.js'
-
-
-
+import notePrevTxt from '../cmps/keeper/note-preview-cmp.js';
+import notePrevImg from '../cmps/keeper/note-img-preview-cmp.js';
+import noteTodos from '../cmps/keeper/todos-list-cmp.js';
+import { eventBus, EVENT_SHRINK_NAV } from '../service/eventbus-service.js';
 
 export default {
-
-    template:`
+  template: `
     <section class="kepper-app">
        <ul class="clean-list flex">
        <li><button v-if="newNoteShow" class="fas fa-times-circle btn-close"  @click="closeCmp"></button></li>
@@ -36,46 +33,45 @@ export default {
     
     </section>
     `,
-       data() {
-        return {
-            newNoteShow : false,
-            btnclass:'',
-            cmps: null
-        }
-    },
-    created(){
-        kepperService.init();
+  data() {
+    return {
+      newNoteShow: false,
+      btnclass: '',
+      cmps: null
+    };
+  },
+  created() {
+    eventBus.$emit(EVENT_SHRINK_NAV, 'close');
 
-        kepperService.query()
-        .then(notes =>{
-            debugger
-            if(notes){
-                this.cmps = notes;
-                debugger
-                console.log('cmps',this.cmps)
-            }
-         
-        })
-    },
-    methods:{
-        goTo(url) {
-            console.log(this.$refs)
-            this.btnclass = url
-            this.newNoteShow = true
-            var urlTo = `/kepperApp/${url}`
-            this.$router.push(urlTo)
-        },
-        closeCmp(){
-            this.newNoteShow = false
-        }
+    kepperService.init();
 
+    kepperService.query().then(notes => {
+      // debugger
+      if (notes) {
+        this.cmps = notes;
+        // debugger
+        console.log('cmps', this.cmps);
+      }
+    });
+  },
+  methods: {
+    goTo(url) {
+      console.log(this.$refs);
+      this.btnclass = url;
+      this.newNoteShow = true;
+      var urlTo = `/kepperApp/${url}`;
+      this.$router.push(urlTo);
     },
-  
-    components:{
-    //    noteTxt,
-        notePrevTxt,
-        notePrevImg,
-        noteTodos
-        // imgNote
+    closeCmp() {
+      this.newNoteShow = false;
     }
-}
+  },
+
+  components: {
+    //    noteTxt,
+    notePrevTxt,
+    notePrevImg,
+    noteTodos
+    // imgNote
+  }
+};
