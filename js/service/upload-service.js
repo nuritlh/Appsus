@@ -16,6 +16,22 @@
 //     doUploadImg(elForm, onSuccess);
 // }
 
+function doUploadImg(elForm, onSuccess) {
+  var formData = new FormData(elForm);
+
+  fetch('https://ca-upload.com/here/upload.php', {
+    method: 'POST',
+    body: formData
+  })
+    .then(function(response) {
+      return response.text();
+    })
+    .then(onSuccess)
+    .catch(function(error) {
+      console.error(error);
+    });
+}
+
 // function doUploadImg(elForm, onSuccess) {
 //   var formData = new FormData(elForm);
 
@@ -36,13 +52,10 @@ function handleImageFromInput(ev, onImageReady) {
   // document.querySelector('.share-container').innerHTML = '';
   // var elReturnFile = document.querySelector('.file-return');
 
-  var reader = new FileReader();
-
   reader.onload = function(event) {
     var img = new Image();
     img.onload = onImageReady.bind(null, img);
     img.src = event.target.result;
-    // debugger;
     console.log(ev.target.files[0].name);
     return Promise.resolve(ev.target.files[0].name);
     // elReturnFile.innerHTML = ev.target.files[0].name;
@@ -50,17 +63,26 @@ function handleImageFromInput(ev, onImageReady) {
   reader.readAsDataURL(ev.target.files[0]);
 }
 
+//   reader.onload = function(event) {
+//     var img = new Image();
+//     img.onload = onImageReady.bind(null, img);
+//     img.src = event.target.result;
+//     // debugger;
+//     console.log(ev.target.files[0].name);
+//     return Promise.resolve(ev.target.files[0].name);
+//     // elReturnFile.innerHTML = ev.target.files[0].name;
+//   };
+//   reader.readAsDataURL(ev.target.files[0]);
+// }
+
 // facebook api
 // (function(d, s, id) {
-//   var js,
-//     fjs = d.getElementsByTagName(s)[0];
-//   if (d.getElementById(id)) return;
-//   js = d.createElement(s);
-//   js.id = id;
-//   js.src =
-//     'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0&appId=807866106076694&autoLogAppEvents=1';
-//   fjs.parentNode.insertBefore(js, fjs);
-// })(document, 'script', 'facebook-jssdk');
+//     var js, fjs = d.getElementsByTagName(s)[0];
+//     if (d.getElementById(id)) return;
+//     js = d.createElement(s); js.id = id;
+//     js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0&appId=807866106076694&autoLogAppEvents=1';
+//     fjs.parentNode.insertBefore(js, fjs);
+//   }(document, 'script', 'facebook-jssdk'));
 
 export default {
   handleImageFromInput
