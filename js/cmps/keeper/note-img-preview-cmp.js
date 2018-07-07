@@ -1,6 +1,7 @@
 import { eventBus, OPEN_NOTE } from '../../service/eventbus-service.js';
 import kepperService from '../../service/kepper-service.js';
 
+
 export default {
   props: ['data', 'id'],
   template: `

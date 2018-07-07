@@ -38,12 +38,10 @@ function addNote(type, noteInput, noteEdit) {
 }
 
 function deleteNote(noteId) {
-  var currIdx = notes.findIndex(note => {
-    return note.id === noteId;
-  });
-  notes.splice(currIdx, 1);
-  saveToStorage(NOTES_KEY, notes);
-  return Promise.resolve();
+    var currIdx = notes.findIndex(note => { return note.id === noteId })
+    notes.splice(currIdx, 1)
+    saveToStorage(NOTES_KEY, notes)
+    return Promise.resolve()
 }
 
 function findNoteById(id) {
@@ -53,9 +51,17 @@ function findNoteById(id) {
   return Promise.resolve(currNote);
 }
 
-// function saveTodo(data){
-//     todo.push(data)
-// }
+function searchNote(searchInput) {
+    let result = []
+    if (searchInput) {
+        result = notes.filter(note => {
+            return (note.data.titelNote.includes(searchInput.byTitle.toLowerCase()))
+        })
+    } else result = notes
+
+    return Promise.resolve(result)
+}
+
 
 function saveToStorage(key, value) {
   utils.saveToStorage(key, value);
@@ -65,10 +71,53 @@ function loadFromStorage(key) {
   return utils.loadFromStorage(key);
 }
 
+function setColor() {
+    var bodyStyles = window.getComputedStyle(document.body);
+    var currVal = bodyStyles.getPropertyValue('--note-bg-color');
+
+    swal("Choose color", {
+        content: {
+            element: "input",
+            attributes: {
+                className: "input-color",
+                placeholder: "Change theme color",
+                value: currVal,
+                type: "color",
+            },
+        },
+        buttons: {
+            cancel: true,
+            confirm: true,
+            Reset: {
+                value: 'whitesmoke'
+            }
+        },
+
+    })
+        .then((value) => {
+            if (value) {
+                renderColor(value)
+            } else {
+                renderColor(currVal)
+            }
+
+        });
+}
+
+function renderColor(colorInput) {
+    var html = document.getElementsByTagName('html')[0];
+    html.style.setProperty("--note-bg-color", colorInput);
+    var elInput = document.querySelector('.input-color');
+}
+
+
 export default {
-  init,
-  addNote,
-  query,
-  findNoteById,
-  deleteNote
-};
+    init,
+    addNote,
+    query, findNoteById,
+    deleteNote,
+    searchNote,
+    setColor
+
+
+}

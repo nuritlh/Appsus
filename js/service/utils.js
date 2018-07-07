@@ -19,7 +19,6 @@ function getCurrDate() {
   if (dd < 10) {
     dd = '0' + dd;
   }
-
   if (mm < 10) {
     mm = '0' + mm;
   }
@@ -28,7 +27,12 @@ function getCurrDate() {
   return today;
 }
 
+function getRandomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 export default {
+  getRandomInteger,
   loadFromStorage,
   saveToStorage,
   makeid,

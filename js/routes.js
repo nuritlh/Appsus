@@ -6,27 +6,26 @@ import noteImg from './cmps/keeper/note-img-cmp.js';
 import todos from './cmps/keeper/todos-list-cmp.js';
 
 export default [
-  { path: '/', component: homePage },
-  { path: '/emailApp', component: emailApp },
-  {
-    path: '/kepperApp',
-    component: kepperApp,
-    children: [
-      {
-        // UserProfile will be rendered inside User's <router-view>
-        // when /user/:id/profile is matched
-        path: 'textNote/:textNoteId?',
-        component: noteTxt
-      },
-
-      {
-        path: 'imgNote/:textNoteId?',
-        component: noteImg
-      },
-      {
-        path: 'todos/:textNoteId?',
-        component: todos
-      }
-    ]
-  }
-];
+            {path: '/',component:homePage},
+            {path: '/emailApp', component: emailApp},
+            {path: '/kepperApp', component: kepperApp, 
+            children: [
+                {
+                  // UserProfile will be rendered inside User's <router-view>
+                  // when /user/:id/profile is matched
+                  path: 'textNote/:textNoteId?',
+                  component: noteTxt,
+                },
+               
+                {
+                  path: 'imgNote/:textNoteId?',
+                  component: noteImg,
+                },
+                {
+                  path: 'todos/:todosId?',
+                  component: todos,
+                },
+               
+              ]}
+         
+        ]
