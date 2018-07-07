@@ -5,10 +5,11 @@ import noteTodos from '../cmps/keeper/todos-list-cmp.js'
 import todosPrevList from '../cmps/keeper/note-todos-preview-cmp.js'
 import searchNote from '../cmps/keeper/search-note-cmp.js'
 
-import { eventBus, EVENT_SHRINK_NAV,
-    OPEN_NOTE } from '../service/eventbus-service.js';
+// import { eventBus, EVENT_SHRINK_NAV,
+//     OPEN_NOTE } from '../service/event-bus-service.js';
 
-// import eventBus, { OPEN_NOTE } from '../service/event-bus.service.js'
+import eventBus, { OPEN_NOTE } from '../service/event-bus-service.js'
+
 
 export default {
 

@@ -1,10 +1,10 @@
 import emailService from '../../service/email-service.js';
 import emailStatus from './email-status-cmp.js';
-import {
-  eventBus,
+import  eventBus,{
+ 
   EVENT_DISPLAY_FILTER_ICONS,
   EVENT_DISPLAY_FILTER_ICONS_FALSE
-} from '../../service/eventbus-service.js';
+} from '../../service/event-bus-service.js';
 
 export default {
   template: `

@@ -1,8 +1,8 @@
 import emailService from '../../service/email-service.js';
-import {
-  eventBus,
+import   eventBus, {
+
   EVENT_DISPLAY_FILTER_ICONS
-} from '../../service/eventbus-service.js';
+} from '../../service/event-bus-service.js';
 
 export default {
   props: ['mail'],

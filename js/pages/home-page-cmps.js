@@ -1,8 +1,8 @@
-import {
-  eventBus,
+import  eventBus,{
+  
   EVENT_SHRINK_NAV,
   EVENT_OPEN_NAV
-} from '../service/eventbus-service.js';
+} from '../service/event-bus-service.js';
 
 export default {
   template: `

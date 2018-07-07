@@ -1,7 +1,7 @@
-import {
-  eventBus,
+import   eventBus, {
+
   EVENT_DISPLAY_FILTER_ICONS_FALSE
-} from '../../service/eventbus-service.js';
+} from '../../service/event-bus-service.js';
 
 export default {
   props: ['email'],

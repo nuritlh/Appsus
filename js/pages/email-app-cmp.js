@@ -3,7 +3,7 @@ import filterEmail from '../cmps/email/filter-email-cmp.js';
 import listEmail from '../cmps/email/list-email-cmp.js';
 import detailsEmail from '../cmps/email/details-email.js';
 import newEmail from '../cmps/email/new-email-cmp.js';
-import { eventBus, EVENT_SHRINK_NAV } from '../service/eventbus-service.js';
+import  eventBus, { EVENT_SHRINK_NAV } from '../service/event-bus-service.js';
 
 export default {
   template: `

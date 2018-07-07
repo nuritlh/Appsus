@@ -1,10 +1,10 @@
 import homePage from './pages/home-page-cmps.js';
 import myRoutes from './routes.js';
-import {
-  eventBus,
+import eventBus ,{
   EVENT_SHRINK_NAV,
   EVENT_OPEN_NAV
-} from './service/eventbus-service.js';
+}
+  from './service/event-bus-service.js';
 
 Vue.use(VueRouter);
 const myRouter = new VueRouter({ routes: myRoutes });
