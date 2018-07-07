@@ -1,26 +1,33 @@
-var emails = [
-  {
-    id: 12345,
-    from: 'bezeq',
-    email: 'bezeq_mail@bezeq.co.il',
-    title:
-      'Dear customer - your account is here and the trees remain in the forest',
-    bodtMsg: {
-      txt: `This email is sent automatically and can not be answered
+import utils from './utils.js';
+
+var emails = null;
+if (utils.loadFromStorage('emails')) emails = utils.loadFromStorage('emails');
+else {
+  emails = [
+    {
+      id: 12345,
+      from: 'bezeq',
+      email: 'bezeq_mail@bezeq.co.il',
+      title:
+        'Dear customer - your account is here and the trees remain in the forest',
+      bodtMsg: {
+        txt: `This email is sent automatically and can not be answered
         If you are unable to view the invoice, you must download and install Acrobat Reader
         Please note that the invoice is a computerized document signed with an approved electronic signature as defined in the Law
         For an explanation of the octaronic signature click here`,
-      imgURL: 'img/email/bezeq.PNG'
+        imgURL: 'img/email/bezeq.PNG'
+      },
+      dateSent: '2013-06-09',
+      isRead: false,
+      isMarked: false
     },
-    dateSent: '2018-06-09'
-  },
-  {
-    id: 12346,
-    from: 'AIG',
-    email: 'service@aig.co.il',
-    title: 'Further to your request - Message from AIG',
-    bodtMsg: {
-      txt: `Hello Shoshi
+    {
+      id: 12346,
+      from: 'AIG',
+      email: 'service@aig.co.il',
+      title: 'Further to your request - Message from AIG',
+      bodtMsg: {
+        txt: `Hello Shoshi
       Thanks for contacting us.
       Following your request, the documents you have requested are attached.
       For your privacy, the documents are encrypted with a password.
@@ -31,49 +38,55 @@ var emails = [
       Best regards,
       
       AIG`,
-      imgURL: 'img/email/AIG.PNG'
+        imgURL: 'img/email/AIG.PNG'
+      },
+      dateSent: '2018-07-05',
+      isRead: false,
+      isMarked: false
     },
-    dateSent: '2018-07-05'
-  },
-  {
-    id: 12347,
-    from: 'misterbit',
-    email: 'amirf@misterbit.co.il',
-    title: 'New Invoice / Receipt 50748 by Mysterbit',
-    bodtMsg: {
-      txt: `Greetings,
+    {
+      id: 12347,
+      from: 'misterbit',
+      email: 'amirf@misterbit.co.il',
+      title: 'New Invoice / Receipt 50748 by Mysterbit',
+      bodtMsg: {
+        txt: `Greetings,
       Payment was received with thanks. To view or download Invoice No. 50748 from Mistrust, please click on the following link:
       Click here to open the document
       A tax invoice / receipt signed electronically in accordance with the provisions of the law and recognized as an original document.
       Best regards,
       Mistrust (amirf@misterbit.co.il)`,
-      imgURL: ''
+        imgURL: ''
+      },
+      dateSent: '2017-11-26',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-06-26'
-  },
-  {
-    id: 12348,
-    from: 'Aba',
-    email: 'aba@gmail.com',
-    title: 'Agreement for the sale of vehicles .pdf',
-    bodtMsg: {
-      txt: `See patches in the attached bubbles
+    {
+      id: 123648,
+      from: 'Aba',
+      email: 'aba@gmail.com',
+      title: 'Agreement for the sale of vehicles .pdf',
+      bodtMsg: {
+        txt: `See patches in the attached bubbles
       https://www.gov.il/en/service/change_vehicle_ownership
       Come back if you want.
       Everything is calm and safe
       father`,
-      imgURL: ''
+        imgURL: ''
+      },
+      dateSent: '2018-05-13',
+      isRead: false,
+      isMarked: false
     },
-    dateSent: '2018-05-13'
-  },
-  {
-    id: 12349,
-    from: 'Funzing',
-    email: 'support@funzing.com',
-    title:
-      'The details of your invitation to Funzing to "Prof. Yoram Yuval: How to be happy?"',
-    bodtMsg: {
-      txt: `Hey Shoshi,
+    {
+      id: 12349,
+      from: 'Funzing',
+      email: 'support@funzing.com',
+      title:
+        'The details of your invitation to Funzing to "Prof. Yoram Yuval: How to be happy?"',
+      bodtMsg: {
+        txt: `Hey Shoshi,
       Thank you for inviting in Funzing the "Yoram Yovel: How to be happy?" 
       Activities will take place on Wednesday, 06/13/2018 at 20: 00. 
       You have friends who love the activity? Now it's a great time to share them!
@@ -81,32 +94,36 @@ var emails = [
       Activity Address: 301 Abba Hillel Silver, Ramat Gan 
       Arrival instructions:
       `,
-      imgURL: 'img/email/Funzing.PNG'
+        imgURL: 'img/email/Funzing.PNG'
+      },
+      dateSent: '2017-07-25',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-06-13'
-  },
-  {
-    id: 13456,
-    from: 'bezeq',
-    email: 'bezeq_mail@bezeq.co.il',
-    title:
-      'Dear customer - your account is here and the trees remain in the forest',
-    bodtMsg: {
-      txt: `This email is sent automatically and can not be answered
+    {
+      id: 13456,
+      from: 'bezeq',
+      email: 'bezeq_mail@bezeq.co.il',
+      title:
+        'Dear customer - your account is here and the trees remain in the forest',
+      bodtMsg: {
+        txt: `This email is sent automatically and can not be answered
         If you are unable to view the invoice, you must download and install Acrobat Reader
         Please note that the invoice is a computerized document signed with an approved electronic signature as defined in the Law
         For an explanation of the octaronic signature click here`,
-      imgURL: 'img/email/bezeq.PNG'
+        imgURL: 'img/email/bezeq.PNG'
+      },
+      dateSent: '2018-06-01',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-06-09'
-  },
-  {
-    id: 13345,
-    from: 'AIG',
-    email: 'service@aig.co.il',
-    title: 'Further to your request - Message from AIG',
-    bodtMsg: {
-      txt: `Hello Shoshi
+    {
+      id: 13345,
+      from: 'AIG',
+      email: 'service@aig.co.il',
+      title: 'Further to your request - Message from AIG',
+      bodtMsg: {
+        txt: `Hello Shoshi
       Thanks for contacting us.
       Following your request, the documents you have requested are attached.
       For your privacy, the documents are encrypted with a password.
@@ -117,49 +134,55 @@ var emails = [
       Best regards,
       
       AIG`,
-      imgURL: 'img/email/AIG.PNG'
+        imgURL: 'img/email/AIG.PNG'
+      },
+      dateSent: '2018-01-15',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-07-05'
-  },
-  {
-    id: 13335,
-    from: 'misterbit',
-    email: 'amirf@misterbit.co.il',
-    title: 'New Invoice / Receipt 50748 by Mysterbit',
-    bodtMsg: {
-      txt: `Greetings,
+    {
+      id: 13335,
+      from: 'misterbit',
+      email: 'amirf@misterbit.co.il',
+      title: 'New Invoice / Receipt 50748 by Mysterbit',
+      bodtMsg: {
+        txt: `Greetings,
       Payment was received with thanks. To view or download Invoice No. 50748 from Mistrust, please click on the following link:
       Click here to open the document
       A tax invoice / receipt signed electronically in accordance with the provisions of the law and recognized as an original document.
       Best regards,
       Mistrust (amirf@misterbit.co.il)`,
-      imgURL: ''
+        imgURL: ''
+      },
+      dateSent: '2018-01-26',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-06-26'
-  },
-  {
-    id: 11112,
-    from: 'Aba',
-    email: 'aba@gmail.com',
-    title: 'Agreement for the sale of vehicles .pdf',
-    bodtMsg: {
-      txt: `See patches in the attached bubbles
+    {
+      id: 11112,
+      from: 'Aba',
+      email: 'aba@gmail.com',
+      title: 'Agreement for the sale of vehicles .pdf',
+      bodtMsg: {
+        txt: `See patches in the attached bubbles
       https://www.gov.il/en/service/change_vehicle_ownership
       Come back if you want.
       Everything is calm and safe
       father`,
-      imgURL: ''
+        imgURL: ''
+      },
+      dateSent: '2018-05-13',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-05-13'
-  },
-  {
-    id: 12334,
-    from: 'Funzing',
-    email: 'support@funzing.com',
-    title:
-      'The details of your invitation to Funzing to "Prof. Yoram Yuval: How to be happy?"',
-    bodtMsg: {
-      txt: `Hey Shoshi,
+    {
+      id: 12334,
+      from: 'Funzing',
+      email: 'support@funzing.com',
+      title:
+        'The details of your invitation to Funzing to "Prof. Yoram Yuval: How to be happy?"',
+      bodtMsg: {
+        txt: `Hey Shoshi,
       Thank you for inviting in Funzing the "Yoram Yovel: How to be happy?" 
       Activities will take place on Wednesday, 06/13/2018 at 20: 00. 
       You have friends who love the activity? Now it's a great time to share them!
@@ -167,32 +190,36 @@ var emails = [
       Activity Address: 301 Abba Hillel Silver, Ramat Gan 
       Arrival instructions:
       `,
-      imgURL: 'img/email/Funzing.PNG'
+        imgURL: 'img/email/Funzing.PNG'
+      },
+      isRead: true,
+      dateSent: '2018-03-23',
+      isMarked: false
     },
-    dateSent: '2018-06-13'
-  },
-  {
-    id: 23451,
-    from: 'bezeq',
-    email: 'bezeq_mail@bezeq.co.il',
-    title:
-      'Dear customer - your account is here and the trees remain in the forest',
-    bodtMsg: {
-      txt: `This email is sent automatically and can not be answered
+    {
+      id: 23451,
+      from: 'bezeq',
+      email: 'bezeq_mail@bezeq.co.il',
+      title:
+        'Dear customer - your account is here and the trees remain in the forest',
+      bodtMsg: {
+        txt: `This email is sent automatically and can not be answered
         If you are unable to view the invoice, you must download and install Acrobat Reader
         Please note that the invoice is a computerized document signed with an approved electronic signature as defined in the Law
         For an explanation of the octaronic signature click here`,
-      imgURL: 'img/email/bezeq.PNG'
+        imgURL: 'img/email/bezeq.PNG'
+      },
+      dateSent: '2018-04-19',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-06-09'
-  },
-  {
-    id: 1253174,
-    from: 'AIG',
-    email: 'service@aig.co.il',
-    title: 'Further to your request - Message from AIG',
-    bodtMsg: {
-      txt: `Hello Shoshi
+    {
+      id: 1253174,
+      from: 'AIG',
+      email: 'service@aig.co.il',
+      title: 'Further to your request - Message from AIG',
+      bodtMsg: {
+        txt: `Hello Shoshi
       Thanks for contacting us.
       Following your request, the documents you have requested are attached.
       For your privacy, the documents are encrypted with a password.
@@ -203,49 +230,55 @@ var emails = [
       Best regards,
       
       AIG`,
-      imgURL: 'img/email/AIG.PNG'
+        imgURL: 'img/email/AIG.PNG'
+      },
+      dateSent: '2017-12-05',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-07-05'
-  },
-  {
-    id: 1288876,
-    from: 'misterbit',
-    email: 'amirf@misterbit.co.il',
-    title: 'New Invoice / Receipt 50748 by Mysterbit',
-    bodtMsg: {
-      txt: `Greetings,
+    {
+      id: 1288876,
+      from: 'misterbit',
+      email: 'amirf@misterbit.co.il',
+      title: 'New Invoice / Receipt 50748 by Mysterbit',
+      bodtMsg: {
+        txt: `Greetings,
       Payment was received with thanks. To view or download Invoice No. 50748 from Mistrust, please click on the following link:
       Click here to open the document
       A tax invoice / receipt signed electronically in accordance with the provisions of the law and recognized as an original document.
       Best regards,
       Mistrust (amirf@misterbit.co.il)`,
-      imgURL: ''
+        imgURL: ''
+      },
+      dateSent: '2017-12-26',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-06-26'
-  },
-  {
-    id: 12875399,
-    from: 'Aba',
-    email: 'aba@gmail.com',
-    title: 'Agreement for the sale of vehicles .pdf',
-    bodtMsg: {
-      txt: `See patches in the attached bubbles
+    {
+      id: 12875399,
+      from: 'Aba',
+      email: 'aba@gmail.com',
+      title: 'Agreement for the sale of vehicles .pdf',
+      bodtMsg: {
+        txt: `See patches in the attached bubbles
       https://www.gov.il/en/service/change_vehicle_ownership
       Come back if you want.
       Everything is calm and safe
       father`,
-      imgURL: ''
+        imgURL: ''
+      },
+      dateSent: '2017-12-13',
+      isRead: true,
+      isMarked: false
     },
-    dateSent: '2018-05-13'
-  },
-  {
-    id: 1200076,
-    from: 'Funzing',
-    email: 'support@funzing.com',
-    title:
-      'The details of your invitation to Funzing to "Prof. Yoram Yuval: How to be happy?"',
-    bodtMsg: {
-      txt: `Hey Shoshi,
+    {
+      id: 1200076,
+      from: 'Funzing',
+      email: 'support@funzing.com',
+      title:
+        'The details of your invitation to Funzing to "Prof. Yoram Yuval: How to be happy?"',
+      bodtMsg: {
+        txt: `Hey Shoshi,
       Thank you for inviting in Funzing the "Yoram Yovel: How to be happy?" 
       Activities will take place on Wednesday, 06/13/2018 at 20: 00. 
       You have friends who love the activity? Now it's a great time to share them!
@@ -253,14 +286,18 @@ var emails = [
       Activity Address: 301 Abba Hillel Silver, Ramat Gan 
       Arrival instructions:
       `,
-      imgURL: 'img/email/Funzing.PNG'
-    },
-    dateSent: '2018-06-13'
-  }
-];
-var markedEmails = [];
+        imgURL: 'img/email/Funzing.PNG'
+      },
+      dateSent: '2016-06-23',
+      isRead: true,
+      isMarked: false
+    }
+  ];
+  utils.saveToStorage('emails', emails);
+}
+var sentEmails = [];
+var checkedEmails = [];
 function query(searchEmail) {
-  // return Promise.resolve(emails);
   return Promise.resolve(emails).then(res => {
     var emails = res;
     if (!searchEmail) return emails;
@@ -283,26 +320,118 @@ function getEmailByID(emailId) {
 function deleteEmail(emailId) {
   var emailIdx = emails.findIndex(email => email.id === emailId);
   emails.splice(emailIdx, 1);
+  utils.saveToStorage('emails', emails);
   return Promise.resolve('deleted!');
 }
-function addMarkedEmail(mailId) {
-  markedEmails.push(mailId);
-  console.log(markedEmails);
+function updateMark(mailId) {
+  emails.forEach(email => {
+    if (email.id === mailId) {
+      email.isMarked = !email.isMarked;
+      if (email.isMarked) {
+        var isCheked = checkedEmails.find(id => id === email.id);
+        if (isCheked === undefined) checkedEmails.push(email.id);
+      } else {
+        var isChekedidx = checkedEmails.findIndex(id => id === email.id);
+        if (isChekedidx !== -1) checkedEmails.splice(isChekedidx, 1);
+      }
+    }
+  });
 }
 function deleteMarkedEmails() {
-  markedEmails.forEach(emailId => {
+  checkedEmails.forEach(emailId => {
     emails.forEach((email, idx) => {
       if (emailId === email.id) {
         emails.splice(idx, 1);
       }
     });
   });
+  utils.saveToStorage('emails', emails);
+}
+function saveSentEmails(newMail) {
+  var name = newMail.email.substr(0, newMail.email.indexOf('@'));
+  var newEMail = {
+    id: Date.now(),
+    from: name,
+    email: newMail.email,
+    title: newMail.title,
+    bodtMsg: {
+      txt: newMail.bodtMsg.txt ? newMail.bodtMsg.txt : '',
+      imgURL: newMail.bodtMsg.imgURL
+    },
+    dateSent: utils.getCurrDate(),
+    isRead: false,
+    isMarked: false
+  };
+  emails.unshift(newEMail);
+  sentEmails.unshift(newEMail);
+  utils.saveToStorage('emails', emails);
+  return Promise.resolve(sentEmails);
+}
+function getUnreadEmails() {
+  var unreadEmails = emails.filter(email => {
+    return email.isRead === false;
+  });
+
+  return Promise.resolve(unreadEmails);
+}
+function getTotalMailsNum() {
+  return Promise.resolve(emails.length);
+}
+function updateUnreadEmail(emailId) {
+  if (emailId) {
+    emails.forEach(email => {
+      if (email.id === emailId) email.isRead = !email.isRead;
+    });
+  } else {
+    checkedEmails.forEach(id => {
+      emails.forEach(email => {
+        if (id === email.id) {
+          email.isRead = !email.isRead;
+        }
+      });
+    });
+  }
+  utils.saveToStorage('emails', emails);
+  return Promise.resolve();
+}
+function filterBy(filter) {
+  return Promise.resolve(emails).then(res => {
+    var emails = res;
+    if (filter === 'all') return emails;
+    var emails = emails.filter(email => {
+      if (filter === 'read') {
+        return email.isRead === true;
+      } else if (filter === 'unread') {
+        return email.isRead === false;
+      }
+    });
+
+    return emails;
+  });
+}
+function sortBy(sort) {
+  if (sort === 'date') {
+    emails.sort(function(a, b) {
+      return a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0;
+    });
+  } else if (sort === 'subject') {
+    emails.sort(function(a, b) {
+      return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+    });
+  }
+  return Promise.resolve(emails);
 }
 
 export default {
   query,
   getEmailByID,
   deleteEmail,
-  addMarkedEmail,
-  deleteMarkedEmails
+  updateMark,
+  deleteMarkedEmails,
+  saveSentEmails,
+  getUnreadEmails,
+  getTotalMailsNum,
+  updateUnreadEmail,
+  filterBy,
+  sortBy
 };

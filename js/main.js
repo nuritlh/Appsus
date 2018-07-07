@@ -7,7 +7,6 @@ import {
 } from './service/eventbus-service.js';
 
 Vue.use(VueRouter);
-
 const myRouter = new VueRouter({ routes: myRoutes });
 
 new Vue({

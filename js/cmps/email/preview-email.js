@@ -7,9 +7,9 @@ import {
 export default {
   props: ['mail'],
   template: `
-      <section>
+      <section :class="{'unread':!mail.isRead}">
             <div class="pre-email flex" @click="openEmail">
-            <label class="per-checkbox" @click.stop="markEmail"><input type="checkbox" ></label>
+            <label class="per-checkbox" ><input @click.stop="markEmail" type="checkbox" :checked="checkedValue" ></label>
                 <h4>{{mail.from}}</h4><p>{{title}}<span> {{txt}}</span></p>
                 <div class="pre-right flex">
                 <div class="pre-email-date">{{mail.dateSent}}</div>
@@ -25,6 +25,9 @@ export default {
     },
     txt: function() {
       return this.mail.bodtMsg.txt.substring(0, 50);
+    },
+    checkedValue: function() {
+      return this.mail.isMarked;
     }
   },
   methods: {
@@ -35,8 +38,8 @@ export default {
     deleteEmail() {
       this.$emit('deleteEmail', this.mail);
     },
-    markEmail() {
-      emailService.addMarkedEmail(this.mail.id);
+    markEmail($event) {
+      emailService.updateMark(this.mail.id);
     }
   }
 };
