@@ -1,9 +1,9 @@
-import eventBus, { OPEN_NOTE } from '../../service/event-bus.service.js'
+import { eventBus, OPEN_NOTE } from '../../service/eventbus-service.js';
 import kepperService from '../../service/kepper-service.js';
 
 export default {
-    props: ['data', 'id'],
-    template: `
+  props: ['data', 'id'],
+  template: `
      <section class="preview-note-txt">
        <div class="preview-txt dynamic-cmp-item flex-col" @click="openTxtCmp">
            <div class="flex space-between">
@@ -24,8 +24,14 @@ export default {
      </section>
      
      `,
-    created() {
-        console.log('data from pre', this.data)
+  created() {
+    console.log('data from pre', this.data);
+  },
+  methods: {
+    openTxtCmp() {
+      var urlTo = `/kepperApp/textNote/${this.id}`;
+      this.$router.push(urlTo);
+      eventBus.$emit(OPEN_NOTE, urlTo);
     },
     methods: {
         openTxtCmp() {
@@ -43,4 +49,5 @@ export default {
             kepperService.setColor()
         }
     }
-}
+  }
+};

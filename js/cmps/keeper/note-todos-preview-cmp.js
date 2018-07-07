@@ -1,5 +1,7 @@
 import kepperService from '../../service/kepper-service.js';
-import eventBus, { OPEN_NOTE } from '../../service/event-bus.service.js'
+// import eventBus, { OPEN_NOTE } from '../../service/event-bus.service.js'
+import { eventBus, OPEN_NOTE } from '../../service/eventbus-service.js';
+
 
 
 

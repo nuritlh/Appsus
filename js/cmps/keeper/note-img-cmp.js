@@ -4,7 +4,7 @@ import kepperService from '../../service/kepper-service.js'
 const txtTypt = 'note-prev-img';
 
 export default {
-    template: `
+  template: `
     <section class="flex justify-center">
         <div class="note-img flex-col align-center">
         <img class="note-img-item" :src="data.url">
@@ -49,6 +49,6 @@ export default {
                     })
             }
         }
-    }
-
-}
+    
+  }
+};

@@ -20,28 +20,50 @@
   border-radius: 15px;
   border: 2px solid #5183a2;
 }
+/*-----------------list-mail-------------------*/
+
 /*-------------pre-email-----------------------*/
 
 .pre-email {
   border-bottom: 1px solid gray;
   cursor: pointer;
 }
+.pre-email:hover {
+  transition: 0.2s ease;
+  background-color: #d3d3d34f;
+}
+.per-checkbox {
+  padding: 5px;
+}
+.per-checkbox:hover {
+  background-color: gray;
+  border-radius: 50%;
+  opacity: 0.3;
+}
 .pre-email h4,
 .pre-email p {
   margin: 5px;
 }
 .pre-email h4 {
-  width: 15%;
+  width: 10%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .pre-email p {
-  width: 85%;
+  width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .pre-email p span {
   font-size: 12px;
 }
+.pre-right {
+  margin: 0 0 0 10px;
+}
 .pre-email-icon {
   padding: 5px;
-  /* display: none; */
 }
 
 .back-icon:hover,
@@ -50,6 +72,13 @@
   background-color: gray;
   border-radius: 50%;
   opacity: 0.3;
+}
+.pre-email-date {
+  font-size: 12px;
+  align-self: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*------------------email-details---------------------*/
@@ -68,4 +97,26 @@
 }
 .email-details p > .dateSent {
   float: right;
+}
+/*-----------new-email--------------------*/
+.add-email {
+  transition: all 0.5s;
+}
+
+@media only screen and (max-width: 800px) {
+  .pre-email p {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .pre-email {
+    flex-direction: column;
+  }
+  .pre-email h4 {
+    width: 100%;
+  }
+  .input-search {
+    width: 70%;
+  }
 }

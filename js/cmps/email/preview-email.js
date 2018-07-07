@@ -1,11 +1,21 @@
+import emailService from '../../service/email-service.js';
+import {
+  eventBus,
+  EVENT_DISPLAY_FILTER_ICONS
+} from '../../service/eventbus-service.js';
+
 export default {
   props: ['mail'],
   template: `
       <section>
             <div class="pre-email flex" @click="openEmail">
+            <label class="per-checkbox" @click.stop="markEmail"><input type="checkbox" ></label>
                 <h4>{{mail.from}}</h4><p>{{title}}<span> {{txt}}</span></p>
-                <span class="pre-email-icon" @click.stop="deleteEmail"><i class="fas fa-trash-alt"></i></span>
-                <span class="pre-email-icon"><i class="far fa-clock"></i></span>
+                <div class="pre-right flex">
+                <div class="pre-email-date">{{mail.dateSent}}</div>
+                  <span class="pre-email-icon" @click.stop="deleteEmail"><i class="fas fa-trash-alt"></i></span>
+                  <span class="pre-email-icon" @click.stop=""><i class="far fa-clock"></i></span>
+                </div>
             </div>
       </section>
       `,
@@ -19,13 +29,14 @@ export default {
   },
   methods: {
     openEmail() {
-      console.log('premail', this.mail);
-      //   this.$router.push(`/email/${this.mail.id}`);
       this.$emit('selected', this.mail);
-      console.log('prebook', this.mail);
+      eventBus.$emit(EVENT_DISPLAY_FILTER_ICONS);
     },
     deleteEmail() {
       this.$emit('deleteEmail', this.mail);
+    },
+    markEmail() {
+      emailService.addMarkedEmail(this.mail.id);
     }
   }
 };

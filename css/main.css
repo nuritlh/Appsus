@@ -74,6 +74,9 @@ button {
 a {
   text-decoration: none;
 }
+.deplay-none {
+  display: none;
+}
 
 /* --------------------helper end---------------- */
 
@@ -86,6 +89,9 @@ nav {
   background-repeat: no-repeat;
   background-size: cover;
   height: 200px;
+}
+.nav-in-pages {
+  height: 50px;
 }
 
 nav div {
