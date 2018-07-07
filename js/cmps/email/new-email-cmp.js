@@ -15,7 +15,7 @@ export default {
                   </span>
                   <div><input type="email" name="email" id="email" v-model="newMail.email" placeholder="To"></div>
                   <div><input type="text" name="name" id="name" v-model="newMail.title" placeholder="Subject"></div>
-                  <div><textarea v-model="newMail.bodtMsg.txt"></textarea></div>
+                  <div class="textarea"><textarea v-model="newMail.bodtMsg.txt"></textarea></div>
                   <button type="submit" class="btn-send-email" @click="checkForm">Send</button>
                 </div>
           </section>

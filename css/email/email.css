@@ -46,6 +46,8 @@ body {
   display: inline;
 }
 /*-----------------list-mail-------------------*/
+.list-emails {
+}
 
 /*-------------pre-email-----------------------*/
 .unread {
@@ -113,6 +115,12 @@ body {
 /*------------------email-details---------------------*/
 .email-details {
   margin: 10px;
+  background-color: var(--note-bg-color);
+  box-shadow: 0 0 6px black;
+  color: #89423f;
+  padding: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 .email-details p {
   border-bottom: 1px solid gray;
@@ -226,5 +234,46 @@ body {
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 500px) {
+  .new-email {
+    background-color: whitesmoke;
+    box-shadow: 0 0 6px black;
+    margin: 0;
+    transition: all 0.3s;
+    cursor: text;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    left: 0;
+  }
+  .email-body {
+    height: 75%;
+  }
+  .email-body .textarea {
+    height: 100%;
+  }
+  .email-body div textarea {
+    height: 100%;
+  }
+  .btn-send-email {
+    margin: 20px 0;
+  }
+  .list-emails.dynamic-cmp-item {
+    margin: 0;
+    box-shadow: 0 0 0;
+  }
+  .email-app {
+    margin: 0;
+  }
+  .folders {
+    width: 50%;
+  }
+  .header-filter {
+    margin: 5px 0 0 0;
+  }
+  .email-details {
+    margin: 0;
+    box-shadow: 0 0 0;
+  }
 }

@@ -4,7 +4,7 @@ export default {
   props: ['mails'],
 
   template: `
-      <section class="dynamic-cmp-item">
+      <section class="list-emails dynamic-cmp-item">
           <div>
               <preview-email v-for="(mail, idx) in mails" v-on:selected="selectedEmail" v-on:deleteEmail="deleteEmail" :mail="mail"></preview-email>
           </div>
