@@ -1,17 +1,9 @@
-
-<<<<<<< HEAD
-import utils from './utils.js'
-// function askRandomImg(randomNum){
-//     try{
-//         return axios.get(`https://picsum.photos/200/300/?image=${randomNum}`);
-=======
 //         uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
 //         document.querySelector('.share-container').innerHTML = `
 //         <a class="w-inline-block social-share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
 //            Share
 //         </a>`
 //     }
->>>>>>> 92709577f0d90c8b9ec50734d1bd8c2d721057ac
 
 //         // prm.then(function(res){
 //         //     renderList(res.data);
@@ -19,13 +11,9 @@ import utils from './utils.js'
 //     } catch(eror){
 //         alert(eror);
 //     }
-   
+
 // }
 
-<<<<<<< HEAD
-function getRandomImg(){
-
-=======
 function doUploadImg(elForm, onSuccess) {
   var formData = new FormData(elForm);
 
@@ -71,7 +59,6 @@ function handleImageFromInput(ev, onImageReady) {
     // elReturnFile.innerHTML = ev.target.files[0].name;
   };
   reader.readAsDataURL(ev.target.files[0]);
->>>>>>> 92709577f0d90c8b9ec50734d1bd8c2d721057ac
 }
 
 //   reader.onload = function(event) {
@@ -86,12 +73,6 @@ function handleImageFromInput(ev, onImageReady) {
 //   reader.readAsDataURL(ev.target.files[0]);
 // }
 
-<<<<<<< HEAD
-
-  export default {
-    getRandomImg
-  }
-=======
 // facebook api
 // (function(d, s, id) {
 //     var js, fjs = d.getElementsByTagName(s)[0];
@@ -104,4 +85,3 @@ function handleImageFromInput(ev, onImageReady) {
 export default {
   handleImageFromInput
 };
->>>>>>> 92709577f0d90c8b9ec50734d1bd8c2d721057ac

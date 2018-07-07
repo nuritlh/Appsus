@@ -1,8 +1,12 @@
 import utils from './utils.js';
 
 var emails = null;
-if (utils.loadFromStorage('emails')) emails = utils.loadFromStorage('emails');
-else {
+if (utils.loadFromStorage('emails')) {
+  emails = utils.loadFromStorage('emails');
+  emails.forEach(email => {
+    email.isMarked = false;
+  });
+} else {
   emails = [
     {
       id: 12345,
@@ -297,6 +301,7 @@ else {
 }
 var sentEmails = [];
 var checkedEmails = [];
+
 function query(searchEmail) {
   return Promise.resolve(emails).then(res => {
     var emails = res;
@@ -336,6 +341,7 @@ function updateMark(mailId) {
       }
     }
   });
+  console.log(checkedEmails);
 }
 function deleteMarkedEmails() {
   checkedEmails.forEach(emailId => {
@@ -386,11 +392,23 @@ function updateUnreadEmail(emailId) {
     checkedEmails.forEach(id => {
       emails.forEach(email => {
         if (id === email.id) {
-          email.isRead = !email.isRead;
+          email.isRead = false;
         }
       });
     });
   }
+  utils.saveToStorage('emails', emails);
+  return Promise.resolve();
+}
+function updatedReadEmail() {
+  checkedEmails.forEach(id => {
+    emails.forEach(email => {
+      if (id === email.id) {
+        email.isRead = true;
+      }
+    });
+  });
+
   utils.saveToStorage('emails', emails);
   return Promise.resolve();
 }
@@ -433,5 +451,6 @@ export default {
   getTotalMailsNum,
   updateUnreadEmail,
   filterBy,
-  sortBy
+  sortBy,
+  updatedReadEmail
 };

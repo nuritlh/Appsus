@@ -7,19 +7,21 @@ import {
 } from '../../service/eventbus-service.js';
 
 export default {
+  props: ['unreadEmailsNum', 'totalMailsNum'],
   template: `
         <section>
           <div class="filter-email">
               <span class="logo">Mailush</span><span class="back-icon" @click="goBack"><i class="fas fa-arrow-left"></i></span>
               <input class="input-search" v-model="searchMail" type="search" @input="getSearchedMails" placeholder="Search mail"></div>
-              <div class="tools-emails-bar" :class="{'deplay-none':mailOpen}" >
+              <div v-if="isChecked" class="tools-emails-bar" :class="{'deplay-none':mailOpen}" >
             <div>  
               <span class="pre-email-icon" @click.stop="composeEmail" title="Add new Email"><i class="fas fa-plus-circle"></i></span>
-              <span class="pre-email-icon" @click.stop="markUnread"  title="mark as read/unread"><i class="fas fa-envelope"></i></span>
+              <span class="pre-email-icon" @click.stop="markUnread"  title="mark as unread"><i class="fas fa-envelope"></i></span>
+              <span class="pre-email-icon" @click.stop="markRead"  title="mark as read"><i class="fas fa-envelope-open"></i></span>
               <span class="pre-email-icon" @click.stop="deleteEmail" title="Delete"><i class="fas fa-trash-alt"></i></span>
               </div>
 
-              <email-status ></email-status>
+              <email-status :unreadEmailsNum="unreadEmailsNum" :totalMailsNum="totalMailsNum"></email-status>
 
               <div>Filter By: 
               
@@ -28,14 +30,14 @@ export default {
                 <span >all</span>
                 </label>
 
-                <label title="filter reder emails" @change="filterby">
+                <label title="filter read emails" @change="filterby">
                 <input type="radio"  value="read" v-model="picked">
-                <span ><i class="fab fa-readme"></i></span>
+                <span class="pre-email-icon"><i class="fas fa-envelope-open"></i></span>
                 </label>
 
-                <label title="filter unreder emails" @change="filterby">
+                <label title="filter unread emails" @change="filterby">
                 <input type="radio"  value="unread" v-model="picked">
-                <span ><i class="fas fa-book"></i></span>
+                <span class="pre-email-icon"><i class="fas fa-envelope"></i></span>
                 </label>
 
               </div>
@@ -44,12 +46,12 @@ export default {
 
                 <label title="sort emails by date" @change="sortBy">
                 <input type="radio"  value="date" v-model="pickedsort">
-                <span ><i class="fas fa-calendar-alt"></i></span>
+                <span class="pre-email-icon"><i class="fas fa-calendar-alt"></i></span>
                 </label>
 
                 <label title="sort emails by subject" @change="sortBy">
                 <input type="radio"  value="subject" v-model="pickedsort">
-                <span ><i class="fas fa-text-height"></i></span>
+                <span class="pre-email-icon"><i class="fas fa-text-height"></i></span>
                 </label>
               </div>
             </div> 
@@ -63,7 +65,8 @@ export default {
       searchMail: '',
       mailOpen: false,
       picked: 'all',
-      pickedsort: 'date'
+      pickedsort: 'date',
+      isChecked: true
     };
   },
   created() {
@@ -87,7 +90,7 @@ export default {
       this.mailOpen = false;
     },
     deleteEmail() {
-      emailService.deleteMarkedEmails();
+      this.$emit('removeme');
     },
     composeEmail() {
       console.log('compose');
@@ -95,7 +98,9 @@ export default {
     },
     markUnread() {
       this.$emit('unread');
-      console.log('fromlist read');
+    },
+    markRead() {
+      this.$emit('read');
     },
     filterby() {
       console.log(this.picked);
