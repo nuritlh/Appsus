@@ -1,10 +1,12 @@
 import emailService from '../../service/email-service.js';
+import { eventBus, EDIT_DRAFT } from '../../service/eventbus-service.js';
 export default {
   template: `
           <section class="new-email">
                 <header>
                   <label class="pre-email-icon" @click="closeNewEmail"><i class="fas fa-times-circle"></i></label>
                   <span>New Message</span>
+                  <label class="pre-email-icon" @click="saveDrafts"><i class="fas fa-save"></i></label>
                 </header>
                 <div class="email-body">
                   <span v-if="errors.length">
@@ -32,6 +34,12 @@ export default {
     };
   },
   created() {},
+  mounted() {
+    eventBus.$on(EDIT_DRAFT, editEmail => {
+      console.log(editEmail);
+      this.newMail = editEmail;
+    });
+  },
   methods: {
     closeNewEmail() {
       this.$emit('close-email');
@@ -66,6 +74,12 @@ export default {
     validEmail: function(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+    },
+    saveDrafts() {
+      emailService.saveToDrafts(this.newMail).then(res => {
+        swal('email saved!');
+      });
+      this.$emit('close-email');
     }
   }
 };

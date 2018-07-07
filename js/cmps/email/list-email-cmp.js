@@ -6,7 +6,7 @@ export default {
   template: `
       <section class="dynamic-cmp-item">
           <div>
-              <preview-email v-for="(mail, idx) in mails" v-on:selected="selectedEmail" v-on:deleteEmail="deleteEmail" :mail="mail" ></preview-email>
+              <preview-email v-for="(mail, idx) in mails" v-on:selected="selectedEmail" v-on:deleteEmail="deleteEmail" :mail="mail"></preview-email>
           </div>
       </section>
       `,

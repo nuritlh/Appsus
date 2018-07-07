@@ -3,9 +3,6 @@ import utils from './utils.js';
 var emails = null;
 if (utils.loadFromStorage('emails')) {
   emails = utils.loadFromStorage('emails');
-  emails.forEach(email => {
-    email.isMarked = false;
-  });
 } else {
   emails = [
     {
@@ -299,9 +296,23 @@ if (utils.loadFromStorage('emails')) {
   ];
   utils.saveToStorage('emails', emails);
 }
+
 var sentEmails = [];
+if (utils.loadFromStorage('sentEmails'))
+  sentEmails = utils.loadFromStorage('sentEmails');
+
+var draftsEmails = [];
+if (utils.loadFromStorage('draftsEmails'))
+  draftsEmails = utils.loadFromStorage('draftsEmails');
+
 var checkedEmails = [];
 
+function removeChecked() {
+  emails.forEach(email => {
+    email.isMarked = false;
+  });
+  checkedEmails = [];
+}
 function query(searchEmail) {
   return Promise.resolve(emails).then(res => {
     var emails = res;
@@ -316,6 +327,9 @@ function query(searchEmail) {
 
     return emails;
   });
+}
+function gatSentEmails() {
+  return Promise.resolve(sentEmails);
 }
 
 function getEmailByID(emailId) {
@@ -371,6 +385,8 @@ function saveSentEmails(newMail) {
   emails.unshift(newEMail);
   sentEmails.unshift(newEMail);
   utils.saveToStorage('emails', emails);
+  utils.saveToStorage('sentEmails', sentEmails);
+
   return Promise.resolve(sentEmails);
 }
 function getUnreadEmails() {
@@ -439,9 +455,35 @@ function sortBy(sort) {
   }
   return Promise.resolve(emails);
 }
+function saveToDrafts(draftEmail) {
+  var draft = {
+    id: Date.now(),
+    from: draftEmail.email,
+    email: draftEmail.email,
+    title: draftEmail.title,
+    bodtMsg: {
+      txt: draftEmail.bodtMsg.txt ? draftEmail.bodtMsg.txt : '',
+      imgURL: draftEmail.bodtMsg.imgURL
+    },
+    dateSent: utils.getCurrDate(),
+    isRead: false,
+    isMarked: false
+  };
+  draftsEmails.push(draft);
+  utils.saveToStorage('draftsEmails', draftsEmails);
+  console.log('draftsEmails', draftsEmails);
+
+  return Promise.resolve(draft);
+}
+function gatDraftsEmails() {
+  console.log(draftsEmails);
+
+  return Promise.resolve(draftsEmails);
+}
 
 export default {
   query,
+  gatSentEmails,
   getEmailByID,
   deleteEmail,
   updateMark,
@@ -452,5 +494,8 @@ export default {
   updateUnreadEmail,
   filterBy,
   sortBy,
-  updatedReadEmail
+  updatedReadEmail,
+  removeChecked,
+  saveToDrafts,
+  gatDraftsEmails
 };

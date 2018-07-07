@@ -9,10 +9,13 @@ export default {
   template: `
       <section :class="{'unread':!mail.isRead}">
             <div class="pre-email flex" @click="openEmail">
-            <label class="per-checkbox" ><input @click.stop="markEmail" type="checkbox" :checked="checkedValue" ></label>
-                <h4>{{mail.from}}</h4><p>{{title}}<span> {{txt}}</span></p>
+              <div class="pre-checkbox">
+                <label class="checkbox-pre" ><input @click.stop="markEmail" type="checkbox" :checked="checkedValue" ></label>
+                <h4>{{mail.from}}</h4>
+              </div>
+              <p>{{title}}<span> {{txt}}</span></p>
                 <div class="pre-right flex">
-                <div class="pre-email-date">{{mail.dateSent}}</div>
+                  <span class="pre-email-date">{{mail.dateSent}}</span>
                   <span class="pre-email-icon" @click.stop="deleteEmail"><i class="fas fa-trash-alt"></i></span>
                   <span class="pre-email-icon" @click.stop=""><i class="far fa-clock"></i></span>
                 </div>
