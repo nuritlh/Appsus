@@ -139,13 +139,26 @@ button {
     font-size: 1.1em;
     transition: all 0.3s;
 }
-button:hover ,button:active {
+button:hover:enabled ,button:active {
     color: #faf4eb;
     box-shadow: 0 0 12px 0px black;
     font-size: 1.2em;
 }
+button:disabled {
+  opacity: 0.4;
+}
 .btn-close {
-    border-radius: 50%;
-    color: whitesmoke;
-    background-color:#e75447;
+  border-radius: 50%;
+  background-color: whitesmoke;
+  color: #e75447;
+  font-size: 1em;
+  padding: 2px;
+
+}
+.btn-close:hover {
+  box-shadow: 0 0 12px 0px black;
+  font-size: 1.2em;
+  color: #e75447;
+
+
 }

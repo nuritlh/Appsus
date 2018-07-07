@@ -25,9 +25,10 @@ export default [
                   component: noteImg,
                 },
                 {
-                  path: 'todos/:textNoteId?',
+                  path: 'todos/:todosId?',
                   component: todos,
                 },
+               
               ]}
          
         ]

@@ -10,9 +10,14 @@ function makeid(){
   return Date.now().valueOf();
 }
 
+function getRandomInteger(min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
+}
+
 export default {
     loadFromStorage,
     saveToStorage,
-    makeid
+    makeid,
+    getRandomInteger
 
 }

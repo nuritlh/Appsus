@@ -1,4 +1,9 @@
 
+:root {
+    --note-bg-color: whitesmoke;
+    
+ 
+  }
 
 .kepper-app {
     padding: 10px;
@@ -19,14 +24,27 @@ flex-wrap: wrap;
     min-width: 50px;
 }
 
+.btn-color {
+    align-self: flex-start;
+    color: #e04f3a;
+    background-color: white;
+}
+.btn-color:hover:enabled {
+    color: #e95749;
+}
 .dynamic-cmp-item {
-    background-color: whitesmoke;
+    background-color: var(--note-bg-color);
     box-shadow:0 0 6px black;
+    color: #89423f;
     padding: 10px;
     margin:5px;
     transition: all 0.3s;
     cursor: pointer;
 }
+.dynamic-cmp-item>div {
+margin:0 0 10px;
+}
+
 .dynamic-cmp-item:hover {
     transform: scale(1.1);
 }
@@ -64,7 +82,42 @@ flex-wrap: wrap;
     margin: 0 0 10px;
 }
 /* todos */
+.add-btn {
+    border-radius: 50%;
+    align-self: flex-start;
+    padding: 5px;
+    margin: 0 0 5px 0;
+    background-color: #8BC34A;
+    outline: none;
+}
 
+.note-todo input {
+    border:none;
+    width: -webkit-fill-available;
+    transition: all 0.3s;
+}
 .note-todo {
-    margin:0 0 10px 0;
+    /* align-items: center;
+    justify-content: center; */
+    background-color: whitesmoke;
+    width: 100%
+}
+.note-todo{
+    border-bottom: 1px solid #7e413d;
+}
+.note-todo>div{
+    width: 100%;
+}
+
+.todos-header {
+    align-self: center;
+}
+.todos-preview ul {
+    margin:0;
+
+}
+.todos-preview li {
+    margin:0;
+    border-bottom: 1px solid #7e413d;
+    
 }
