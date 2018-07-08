@@ -74,7 +74,6 @@ export default {
       this.newNoteShow = false;
     },
     searchNote(searchInput) {
-      debugger;
       kepperService.searchNote(searchInput).then(res => {
         this.cmps = res;
       });

@@ -15,8 +15,8 @@ export default {
         <img class="note-img-item" ref="imgToUpload" :src="data.url">
         <input autoFocus class="note-img-item"  name="titel"
          type="text" v-model="data.titelNote" placeholder="Title"/>
-        <button  :class="[isEdit?'far fa-save':'fas fa-plus-circle']" 
-        class="note-img-item" @click="addImgNote"></button>
+        <button  
+        class="far fa-save note-img-item" @click="addImgNote"></button>
         </div>
     </section>
     

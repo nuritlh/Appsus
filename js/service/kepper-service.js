@@ -156,7 +156,10 @@ function sortByPinNote() {
     return Promise.resolve(notes);
 }
 
+function careteNotefromEmail(email) {
+    
 
+}
 function saveToStorage(key, value) {
     utils.saveToStorage(key, value)
 }
