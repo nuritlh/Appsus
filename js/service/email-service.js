@@ -385,6 +385,11 @@ function saveSentEmails(newMail) {
   };
   sentEmails.unshift(newEMail);
   utils.saveToStorage('sentEmails', sentEmails);
+  var sentEmailidx = draftsEmails.findIndex(email => {
+    email.id === newMail.id;
+    draftsEmails.splice(sentEmailidx, 1);
+    utils.saveToStorage('draftsEmails', draftsEmails);
+  });
 
   return Promise.resolve(sentEmails);
 }
@@ -456,7 +461,7 @@ function sortBy(sort) {
 }
 function saveToDrafts(draftEmail) {
   var draft = {
-    id: Date.now(),
+    id: draftEmail.id ? draftEmail.id : Date.now(),
     from: draftEmail.email,
     email: draftEmail.email,
     title: draftEmail.title,
@@ -468,7 +473,11 @@ function saveToDrafts(draftEmail) {
     isRead: false,
     isMarked: false
   };
-  draftsEmails.push(draft);
+  var draftIdx = draftsEmails.findIndex(draft => draft.id === draftEmail.id);
+  draftIdx === -1
+    ? draftsEmails.unshift(draft)
+    : (draftsEmails[draftIdx] = draft);
+
   utils.saveToStorage('draftsEmails', draftsEmails);
   console.log('draftsEmails', draftsEmails);
 
@@ -479,6 +488,10 @@ function gatDraftsEmails() {
 
   return Promise.resolve(draftsEmails);
 }
+
+function careteNotefromEmail(email) {}
+//send mail to noteApp
+function createEmailFromNote(note) {}
 
 export default {
   query,
@@ -496,5 +509,7 @@ export default {
   updatedReadEmail,
   removeChecked,
   saveToDrafts,
-  gatDraftsEmails
+  gatDraftsEmails,
+  careteNotefromEmail,
+  createEmailFromNote
 };
