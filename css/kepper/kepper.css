@@ -21,6 +21,9 @@ flex-wrap: wrap;
     margin:0 10px 0 0;
    
 }
+.note-to-email{
+    align-self: flex-end;
+}
 
 .btn-keep {
     min-width: 50px;

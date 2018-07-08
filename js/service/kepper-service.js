@@ -156,6 +156,7 @@ function sortByPinNote() {
     return Promise.resolve(notes);
 }
 
+
 function saveToStorage(key, value) {
     utils.saveToStorage(key, value)
 }

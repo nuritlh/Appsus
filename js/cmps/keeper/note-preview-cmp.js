@@ -1,5 +1,6 @@
 import { eventBus, OPEN_NOTE } from '../../service/eventbus-service.js';
 import kepperService from '../../service/kepper-service.js';
+import emailService from '../../service/email-service.js';
 
 export default {
   props: ['data', 'id', 'isPin'],
@@ -19,9 +20,15 @@ export default {
         <hr>
         <p>{{data.noteTxt}}</p>
     </div>
+    <div class="flex space-between">
     <button class="btn-color" @click.stop="changeColor">
        <i class="fas fa-palette"></i>
        </button>
+       <span title="send to your mail" @click.stop="sendAsEmail" class="pre-email-icon note-to-email">
+       <i class="fas fa-envelope"></i>
+       </span>
+    </div>
+
        </div>
          
      </section>
@@ -59,6 +66,10 @@ export default {
           this.defulteColor = this.defulteColor;
         }
       });
+    },
+    sendAsEmail(){
+      emailService.createEmailFromNote(this.data)
+
     },
     pinNote() {
       this.$emit('notePin', this.id);
