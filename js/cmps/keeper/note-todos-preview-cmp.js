@@ -1,8 +1,9 @@
 import kepperService from '../../service/kepper-service.js';
 import { eventBus, OPEN_NOTE } from '../../service/eventbus-service.js';
+import emailService from '../../service/email-service.js';
 
 export default {
-  props: ['data', 'id','isPin'],
+  props: ['data', 'id', 'isPin'],
   template: `
     <section>
         <div class="dynamic-cmp-item flex-col" @click="openTodosCmp" 
@@ -23,13 +24,17 @@ export default {
                <div :class="{hidden:!todo.isChecked}" class="demo-checkbox">
                <i class="fas fa-check-circle"></i>
                </div>
-             <!-- <input :disabled="true" :value="todo.isChecked"  type="checkbox" /> -->
             </div>
           </li>
         </ul>
-        <button class="btn-color" @click.stop="changeColor">
-       <i class="fas fa-palette"></i>
-       </button>
+        <div class="flex space-between">
+            <button class="btn-color" @click.stop="changeColor">
+            <i class="fas fa-palette"></i>
+            </button>
+            <span title="send to your mail" @click.stop="sendAsEmail" class="pre-email-icon note-to-email">
+            <i class="fas fa-envelope"></i>
+            </span>
+            </div>
         </div>
     </section>
     `,
@@ -45,7 +50,6 @@ export default {
     isNotePin() {
       return this.isPin;
     }
-  
   },
   methods: {
     openTodosCmp() {
@@ -69,6 +73,10 @@ export default {
     },
     pinNote() {
       this.$emit('notePin', this.id);
+    },
+    sendAsEmail() {
+      emailService.createEmailFromNote(this.data);
+      swal('Note sent');
     }
   }
 };

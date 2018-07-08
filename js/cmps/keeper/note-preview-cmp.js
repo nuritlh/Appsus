@@ -68,8 +68,8 @@ export default {
       });
     },
     sendAsEmail(){
-      emailService.createEmailFromNote(this.data)
-
+      emailService.createEmailFromNote(this.data);
+      swal('Note sent');
     },
     pinNote() {
       this.$emit('notePin', this.id);
