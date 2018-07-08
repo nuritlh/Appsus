@@ -42,7 +42,7 @@ export default {
       newNoteShow: false,
       btnclass: '',
       cmps: null,
-      load:true
+      load: true
     };
   },
   created() {
@@ -53,7 +53,7 @@ export default {
     kepperService.query().then(notes => {
       if (notes) {
         this.cmps = notes;
-        this.load = false
+        this.load = false;
       }
     });
     eventBus.$on(OPEN_NOTE, url => {
@@ -62,11 +62,10 @@ export default {
     });
 
     eventBus.$on(CLOSE_NOTE, noteClose => {
-      if(noteClose){
-        this.closeCmp()
+      if (noteClose) {
+        this.closeCmp();
       }
     });
-    
   },
   computed: {},
   methods: {
@@ -91,8 +90,7 @@ export default {
       kepperService.sortByPinNote().then(res => {
         this.cmps = res;
       });
-    },
-    
+    }
   },
 
   components: {
