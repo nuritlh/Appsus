@@ -3,6 +3,7 @@ import utils from './utils.js';
 var emails = null;
 if (utils.loadFromStorage('emails')) {
   emails = utils.loadFromStorage('emails');
+  removeChecked();
 } else {
   emails = [
     {
@@ -382,9 +383,7 @@ function saveSentEmails(newMail) {
     isRead: false,
     isMarked: false
   };
-  emails.unshift(newEMail);
   sentEmails.unshift(newEMail);
-  utils.saveToStorage('emails', emails);
   utils.saveToStorage('sentEmails', sentEmails);
 
   return Promise.resolve(sentEmails);

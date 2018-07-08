@@ -40,6 +40,16 @@ body {
   display: flex;
   justify-content: space-around;
 }
+.all-emails-bar {
+  border: 1px solid;
+  border-radius: 5px;
+  width: 100px;
+  margin: 5px auto;
+}
+.unread-bar {
+  background-color: #cd9f80;
+  border-radius: 5px;
+}
 /*-----------------status-mail-------------------*/
 
 .email-status {
@@ -275,5 +285,8 @@ body {
   .email-details {
     margin: 0;
     box-shadow: 0 0 0;
+  }
+  .all-emails-bar {
+    margin: 5px auto;
   }
 }

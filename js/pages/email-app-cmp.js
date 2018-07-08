@@ -60,9 +60,7 @@ export default {
       this.getUnreadAndTotalEmails();
     },
     deleteEmail(email) {
-      emailService.deleteEmail(email.id).then(res => {
-        console.log(res);
-      });
+      emailService.deleteEmail(email.id).then(res => {});
       emailService.query().then(mails => {
         this.mails = mails;
       });

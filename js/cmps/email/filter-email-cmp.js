@@ -76,7 +76,6 @@ export default {
   },
   created() {
     this.mailOpen = false;
-    console.log(this.selectedSort);
   },
   mounted() {
     eventBus.$on(EVENT_DISPLAY_FILTER_ICONS, msg => {
