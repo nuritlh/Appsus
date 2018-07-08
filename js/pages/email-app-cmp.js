@@ -32,6 +32,7 @@ export default {
   created() {
     emailService.query().then(mails => {
       this.mails = mails;
+      eventBus.$emit(EVENT_SHRINK_NAV, 'close');
     });
 
     this.getUnreadAndTotalEmails();

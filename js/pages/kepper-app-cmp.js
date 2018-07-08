@@ -1,16 +1,18 @@
-import kepperService from '../service/kepper-service.js'
-import notePrevTxt from '../cmps/keeper/note-preview-cmp.js'
-import notePrevImg from '../cmps/keeper/note-img-preview-cmp.js'
-import noteTodos from '../cmps/keeper/todos-list-cmp.js'
-import todosPrevList from '../cmps/keeper/note-todos-preview-cmp.js'
-import searchNote from '../cmps/keeper/search-note-cmp.js'
+import kepperService from '../service/kepper-service.js';
+import notePrevTxt from '../cmps/keeper/note-preview-cmp.js';
+import notePrevImg from '../cmps/keeper/note-img-preview-cmp.js';
+import noteTodos from '../cmps/keeper/todos-list-cmp.js';
+import todosPrevList from '../cmps/keeper/note-todos-preview-cmp.js';
+import searchNote from '../cmps/keeper/search-note-cmp.js';
 
-
-import eventBus, { OPEN_NOTE } from '../service/event-bus.service.js'
+import {
+  eventBus,
+  EVENT_SHRINK_NAV,
+  OPEN_NOTE
+} from '../service/eventbus-service.js';
 
 export default {
-
-    template: `
+  template: `
     <section class="kepper-app">
         <search-note @search="searchNote">
         </search-note>
@@ -36,69 +38,60 @@ export default {
 
     </section>
     `,
-    data() {
-        return {
-            newNoteShow: false,
-            btnclass: '',
-            cmps: null,
-        }
+  data() {
+    return {
+      newNoteShow: false,
+      btnclass: '',
+      cmps: null
+    };
+  },
+  created() {
+    eventBus.$emit(EVENT_SHRINK_NAV, 'close');
+    kepperService.init();
+
+    kepperService.query().then(notes => {
+      if (notes) {
+        this.cmps = notes;
+        console.log('cmps', this.cmps);
+      }
+    });
+    eventBus.$on(OPEN_NOTE, url => {
+      this.newNoteShow = true;
+      this.$router.push(url);
+    });
+  },
+  computed: {},
+  methods: {
+    goTo(url) {
+      console.log(this.$refs);
+      this.btnclass = url;
+      this.newNoteShow = true;
+      var urlTo = `/kepperApp/${url}`;
+      this.$router.push(urlTo);
     },
-    created() {
-        kepperService.init();
-
-        kepperService.query()
-            .then(notes => {
-                if (notes) {
-                    this.cmps = notes;
-                    console.log('cmps', this.cmps)
-                }
-
-            });
-        eventBus.$on(OPEN_NOTE, url => {
-            this.newNoteShow = true
-            this.$router.push(url)
-        })
+    closeCmp() {
+      this.newNoteShow = false;
     },
-    computed:{
- 
+    searchNote(searchInput) {
+      debugger;
+      kepperService.searchNote(searchInput).then(res => {
+        this.cmps = res;
+      });
     },
-    methods: {
-        goTo(url) {
-            console.log(this.$refs)
-            this.btnclass = url
-            this.newNoteShow = true
-            var urlTo = `/kepperApp/${url}`
-            this.$router.push(urlTo)
-        },
-        closeCmp() {
-            this.newNoteShow = false
-        },
-        searchNote(searchInput) {
-            debugger
-                kepperService.searchNote(searchInput)
-                    .then(res => {
-                        this.cmps = res
-                    })
-        },
-        sortByPin(noteId){
-            
-                kepperService.addPinToNote(noteId);
+    sortByPin(noteId) {
+      kepperService.addPinToNote(noteId);
 
-                kepperService.sortByPinNote()
-                .then(res=>{
-                    this.cmps = res
-                })
-           
-        }
-
-    },
-
-    components: {
-        notePrevTxt,
-        notePrevImg,
-        noteTodos,
-        todosPrevList,
-        searchNote
-
+      kepperService.sortByPinNote().then(res => {
+        this.cmps = res;
+      });
     }
-}
+  },
+
+  components: {
+    notePrevTxt,
+    notePrevImg,
+    noteTodos,
+    todosPrevList,
+    searchNote
+  }
+};

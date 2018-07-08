@@ -1,9 +1,8 @@
-import eventBus, { ADD_TODO } from '../../service/event-bus.service.js'
 import kepperService from '../../service/kepper-service.js';
 
 export default {
-    props:['todo'],
-    template:`
+  props: ['todo'],
+  template: `
     <section class="flex">
     <div class="flex note-todo">
        
@@ -17,24 +16,19 @@ export default {
     </div>
     </section>
     `,
-    data() {
-            return {
-                isSave:false,
-                isEdit:false
-            }
+  data() {
+    return {
+      isSave: false,
+      isEdit: false
+    };
+  },
+
+  methods: {
+    deleteTodo(id) {
+      kepperService.deleteTodo(id);
     },
-  
-    methods:{
-        deleteTodo(id){
-         
-       kepperService.deleteTodo(id)
-        
-        },
-        saveTodoInService(){
-            kepperService.saveTodo(this.todo)
-        }
-       
+    saveTodoInService() {
+      kepperService.saveTodo(this.todo);
     }
-
-
-}
+  }
+};
