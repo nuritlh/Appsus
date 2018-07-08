@@ -1,5 +1,5 @@
 import toDo from '../keeper/note-todo-cmp.js';
-import utilsService from '../../service/utils.js';
+import { eventBus, CLOSE_NOTE } from '../../service/eventbus-service.js';
 import kepperService from '../../service/kepper-service.js';
 
 const todosTypt = 'todos-prev-list';
@@ -11,14 +11,15 @@ export default {
         <div class="flex todos-header">
             <input  name="titel" autoFocus type="text" v-model="data.titelNote" 
             placeholder="Todos"/>
-            <button :disabled="(!data.todosItem.length > 0)" class="far fa-save" @click="addTodosNote">
-            </button>
         </div>
      <div class="flex-col todos-main">
-         <div >
+         <div class="todos-container">
             <to-do class="animated fadeIn" v-for="todo in data.todosItem" :todo="todo">
             </to-do>
-             
+  </div>
+  <div class="flex justify-center">
+  <button :disabled="(!data.todosItem.length > 0)" class="far fa-save save-todo-btn" @click="addTodosNote">
+            </button>
   </div>
 
   </div>
@@ -77,7 +78,8 @@ export default {
     },
     addTodosNote() {
       kepperService.addNote(todosTypt, this.data, this.noteEdit).then(() => {
-        swal('your todos added to the list');
+        swal("your note added to the list");
+        setTimeout(function (){eventBus.$emit(CLOSE_NOTE,true)},800)
         kepperService.createTodos();
       });
     },

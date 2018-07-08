@@ -45,6 +45,7 @@ body {
   border-radius: 5px;
   width: 100px;
   margin: 5px auto;
+  display: inline-block;
 }
 .unread-bar {
   background-color: #cd9f80;
@@ -123,6 +124,10 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.filter-by input,
+.sort-by input {
+  display: none;
 }
 
 /*------------------email-details---------------------*/

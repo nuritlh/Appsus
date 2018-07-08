@@ -13,7 +13,7 @@ export default {
           <div class="filter-email">
               <div class="header-filter flex">
                 <span class="back-icon" :class="{'deplay-none':mailOpen}" @click="openNav" title="Open folders"><i class="fas fa-bars"></i></span>
-                <span class="back-icon" @click="goBack" title="Back"><i class="fas fa-arrow-left"></i></span>
+                <span class="back-icon" :class="{'deplay-none':!mailOpen}" @click="goBack" title="Back"><i class="fas fa-arrow-left"></i></span>
                 <input class="input-search" v-model="searchMail" type="search" @input="getSearchedMails" placeholder="Search mail"></div>
               </div>
               

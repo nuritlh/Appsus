@@ -8,7 +8,8 @@ import searchNote from '../cmps/keeper/search-note-cmp.js';
 import {
   eventBus,
   EVENT_SHRINK_NAV,
-  OPEN_NOTE
+  OPEN_NOTE,
+  CLOSE_NOTE
 } from '../service/eventbus-service.js';
 
 export default {
@@ -26,8 +27,7 @@ export default {
        <router-view v-if="newNoteShow">
         </router-view>
     <div v-else  class="dynamic-cmp flex">
-      <!-- <img :class="{hidden:load}" class="loading-gif" src="img/main/loading.gif"> -->
-    <component    v-if="cmps" v-for="(cmp, idx) in cmps" :is="cmp.type" :key="idx" 
+    <component v-if="cmps" v-for="(cmp, idx) in cmps" :is="cmp.type" :key="idx" 
        :id="cmp.id"
        :isPin = "cmp.pinNote"
        @notePin="sortByPin"
@@ -60,6 +60,13 @@ export default {
       this.newNoteShow = true;
       this.$router.push(url);
     });
+
+    eventBus.$on(CLOSE_NOTE, noteClose => {
+      if(noteClose){
+        this.closeCmp()
+      }
+    });
+    
   },
   computed: {},
   methods: {
@@ -84,7 +91,8 @@ export default {
       kepperService.sortByPinNote().then(res => {
         this.cmps = res;
       });
-    }
+    },
+    
   },
 
   components: {

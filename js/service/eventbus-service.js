@@ -5,5 +5,6 @@ export const EVENT_DISPLAY_FILTER_ICONS_FALSE =
   'EVENT_DISPLAY_FILTER_ICONS_FALSE';
 export const OPEN_NOTE = 'OPEN_NOTE';
 export const EDIT_DRAFT = 'EDIT_DRAFT';
+export const CLOSE_NOTE = 'CLOSE_NOTE';
 
 export const eventBus = new Vue();

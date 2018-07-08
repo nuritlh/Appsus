@@ -1,4 +1,4 @@
-import utils from '../../service/utils.js'
+import { eventBus, CLOSE_NOTE } from '../../service/eventbus-service.js';
 import kepperService from '../../service/kepper-service.js'
 
 const txtTypt = 'note-prev-img';
@@ -56,7 +56,7 @@ export default {
                 kepperService.addNote(txtTypt,this.data,this.noteEdit)
                 .then(()=>{
                     swal("your note added to the list");
-                 
+                    setTimeout(function (){eventBus.$emit(CLOSE_NOTE,true)},800)
                 })
             }
         },
@@ -64,7 +64,6 @@ export default {
             console.log('jojoj')
             var files = ev.target.files;
             var reader = new FileReader();
-            // var then = this;
             var urlUpload = ''
             reader.onload = ( (file)=>{
                 return ((e)=>{

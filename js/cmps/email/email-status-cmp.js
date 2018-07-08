@@ -2,7 +2,7 @@ import emailsService from '../../service/email-service.js';
 export default {
   props: ['unreadEmailsNum', 'totalMailsNum'],
   template: `
-          <section class="email-status">Read mails
+          <section class="email-status"><span>Read mails</span>
             <div class="all-emails-bar">
               <div class="unread-bar" :style="'width:'+percentToShow+'px'">{{unreadPercent}}%</div>
             </div>
