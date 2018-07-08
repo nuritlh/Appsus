@@ -22,6 +22,7 @@ new Vue({
   },
   mounted() {
     eventBus.$on(EVENT_SHRINK_NAV, msg => {
+      console.log('here');
       this.isInPage = true;
     });
     eventBus.$on(EVENT_OPEN_NAV, msg => {

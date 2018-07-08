@@ -47,6 +47,7 @@ export default {
   },
   created() {
     eventBus.$emit(EVENT_SHRINK_NAV, 'close');
+    console.log('close from kepper');
     kepperService.init();
 
     kepperService.query().then(notes => {

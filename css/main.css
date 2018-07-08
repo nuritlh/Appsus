@@ -76,6 +76,9 @@ a {
 }
 
 /* --------------------helper end---------------- */
+.nav-in-pages {
+  height: 50px;
+}
 
 .home-page > div {
   margin: 10% 0 0 0;
@@ -97,7 +100,7 @@ nav div a {
   font-size: 1.2em;
   transition: all 0.3s;
 }
-nav div a:hover{
+nav div a:hover {
   font-size: 1.5em;
 }
 
@@ -115,15 +118,14 @@ nav div a:hover{
 .route-box a {
   font-size: 2em;
   color: whitesmoke;
-  transition:all 0.3s;
+  transition: all 0.3s;
 }
-.route-box a:hover{
+.route-box a:hover {
   color: #80413f;
 }
 .route-box:hover {
   font-size: 1.2em;
   box-shadow: 0 0 12px black;
-
 }
 .router-link-active {
   font-weight: bold;
@@ -132,17 +134,18 @@ nav div a:hover{
 
 /* button */
 button {
-    background-color: #96584a;
-    border: none;
-    color: #f7efe5;
-    padding: 10px;
-    font-size: 1.1em;
-    transition: box-shadow 0.3s,color 0.3s;
+  background-color: #96584a;
+  border: none;
+  color: #f7efe5;
+  padding: 10px;
+  font-size: 1.1em;
+  transition: box-shadow 0.3s, color 0.3s;
 }
-button:hover:enabled ,button:active {
-    color: #faf4eb;
-    box-shadow: 0 0 12px 0px black;
-    /* font-size: 1.2em; */
+button:hover:enabled,
+button:active {
+  color: #faf4eb;
+  box-shadow: 0 0 12px 0px black;
+  /* font-size: 1.2em; */
 }
 button:disabled {
   opacity: 0.4;
@@ -153,15 +156,11 @@ button:disabled {
   color: #e75447;
   font-size: 1em;
   padding: 2px;
-
 }
 .btn-close:hover:enabled {
   box-shadow: 0 0 12px 0px black;
   font-size: 1.2em;
   color: #e75447;
-
-
 }
 
 /* annimtaion */
-

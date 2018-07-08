@@ -13,7 +13,7 @@
 
 <body>
     <main id="app">
-        <nav>
+        <nav v-bind:class="{'nav-in-pages':isInPage}">
             <div>
                 <router-link exact to="/">home</router-link>
                 <router-link exact to="/emailApp">email</router-link>
@@ -23,7 +23,7 @@
         <router-view>
         </router-view>
     </main>
-    
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="module" src="js/main.js"></script>
     <script src="lib/vue-router.js"></script>

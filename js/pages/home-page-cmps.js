@@ -1,9 +1,10 @@
-
-
-
+import {
+  eventBus,
+  EVENT_SHRINK_NAV,
+  EVENT_OPEN_NAV
+} from '../service/eventbus-service.js';
 export default {
-
-    template:`
+  template: `
     <section class="home-page">
         <div class="flex align-center space-around">
             <div  class="route-box email-route flex align-center">
@@ -14,5 +15,8 @@ export default {
             </div>
         </div>
     </section>
-    `
-}
+    `,
+  created() {
+    eventBus.$emit(EVENT_OPEN_NAV, 'open');
+  }
+};
