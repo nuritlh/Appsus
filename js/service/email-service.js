@@ -329,6 +329,7 @@ function query(searchEmail) {
     return emails;
   });
 }
+
 function gatSentEmails() {
   return Promise.resolve(sentEmails);
 }
