@@ -1,6 +1,6 @@
 import emailService from '../../service/email-service.js';
-import { eventBus, EDIT_DRAFT } from '../../service/eventbus-service.js';
 export default {
+  props: ['editEmail'],
   template: `
           <section class="new-email">
                 <header>
@@ -24,6 +24,7 @@ export default {
     return {
       errors: [],
       newMail: {
+        id: null,
         title: null,
         email: null,
         bodtMsg: {
@@ -33,16 +34,19 @@ export default {
       }
     };
   },
-  created() {},
-  mounted() {
-    eventBus.$on(EDIT_DRAFT, editEmail => {
-      console.log(editEmail);
-      this.newMail = editEmail;
-    });
+  created() {
+    console.log(this.editEmail);
+    if (this.editEmail) {
+      (this.newMail.id = this.editEmail.id),
+        (this.newMail.title = this.editEmail.title),
+        (this.newMail.email = this.editEmail.email),
+        (this.newMail.bodtMsg.txt = this.editEmail.bodtMsg.txt);
+    }
   },
   methods: {
     closeNewEmail() {
       this.$emit('close-email');
+      this.$emit('remove-edit');
     },
     checkForm: function(e) {
       this.errors = [];
@@ -61,6 +65,8 @@ export default {
           .saveSentEmails(this.newMail)
           .then(res => {
             swal('email was sent!');
+            this.$emit('remove-edit');
+            this.$router.push('/emailApp');
           })
           .catch(() => {
             swal('err');
@@ -79,6 +85,7 @@ export default {
       emailService.saveToDrafts(this.newMail).then(res => {
         swal('email saved!');
       });
+      this.$emit('remove-edit');
       this.$emit('close-email');
     }
   }

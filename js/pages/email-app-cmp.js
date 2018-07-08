@@ -4,7 +4,11 @@ import listEmail from '../cmps/email/list-email-cmp.js';
 import detailsEmail from '../cmps/email/details-email.js';
 import newEmail from '../cmps/email/new-email-cmp.js';
 import folders from '../cmps/email/folders-emails.js';
-import { eventBus, EVENT_SHRINK_NAV } from '../service/eventbus-service.js';
+import {
+  eventBus,
+  EVENT_SHRINK_NAV,
+  EDIT_DRAFT
+} from '../service/eventbus-service.js';
 
 export default {
   template: `
@@ -12,7 +16,7 @@ export default {
             <filter-email v-on:back="back" v-on:removeme="removeme"  v-on:search="GetSearchedMails" :unreadEmailsNum="unreadEmailsNum" :totalMailsNum="totalMailsNum" v-on:new-email="createNewEmail" v-on:unread="updateMarkedUnread" v-on:read="updateMarkedRead"  v-on:fliter-by="filterBy" v-on:sort-by="sortBy" v-on:open-nav="openCloseNav"></filter-email>
             <list-email v-if="!selectedemail" v-on:selected="selectedEmail"  v-on:deleteEmail="deleteEmail" :mails="mails"></list-email>
             <details-email v-if="selectedemail" :email="selectedemail" v-on:deleteEmail="deleteEmail" v-on:back="back" :onEnditMode="onEnditMode" ></details-email>    
-            <new-email v-if="newEmail" v-on:close-email="closeEmail"></new-email>
+            <new-email v-if="newEmail" v-on:remove-edit="removeEdit" v-on:close-email="closeEmail" :editEmail="editEmail"></new-email>
             <folders v-if="isOpenBar" v-on:close-nav="openCloseNav" v-on:inbox-folder="openInboxEmails" v-on:sent-folder="openSentEmails" v-on:drafts-folder="openDraftsEmails"></folders>
     </section>
     `,
@@ -26,7 +30,8 @@ export default {
       totalMailsNum: 0,
       onFilter: false,
       isOpenBar: false,
-      onEnditMode: false
+      onEnditMode: false,
+      editEmail: null
     };
   },
   created() {
@@ -35,7 +40,11 @@ export default {
       eventBus.$emit(EVENT_SHRINK_NAV, 'close');
       console.log('close from email');
     });
-
+    eventBus.$on(EDIT_DRAFT, editEmail => {
+      console.log('from app new edit mail', editEmail);
+      this.editEmail = editEmail;
+      this.newEmail = true;
+    });
     this.getUnreadAndTotalEmails();
   },
   methods: {
@@ -115,18 +124,24 @@ export default {
         this.mails = mails;
         this.onEnditMode = false;
       });
+      emailService.removeChecked();
     },
     openSentEmails() {
       emailService.gatSentEmails().then(mails => {
         this.mails = mails;
         this.onEnditMode = false;
       });
+      emailService.removeChecked();
     },
     openDraftsEmails() {
       emailService.gatDraftsEmails().then(mails => {
         this.mails = mails;
         this.onEnditMode = true;
       });
+      emailService.removeChecked();
+    },
+    removeEdit() {
+      this.editEmail = null;
     }
   }
 };

@@ -17,7 +17,7 @@ export default {
                 <div class="pre-right flex">
                   <span class="pre-email-date">{{mail.dateSent}}</span>
                   <span class="pre-email-icon" @click.stop="deleteEmail"><i class="fas fa-trash-alt"></i></span>
-                  <span class="pre-email-icon" @click.stop=""><i class="far fa-clock"></i></span>
+                  <span class="pre-email-icon" @click.stop="careteNote"><i class="far fa-clock"></i></span>
                 </div>
             </div>
       </section>
@@ -43,7 +43,9 @@ export default {
     },
     markEmail($event) {
       emailService.updateMark(this.mail.id);
+    },
+    careteNote() {
+      emailService.careteNotefromEmail(this.mail);
     }
   }
 };
-
