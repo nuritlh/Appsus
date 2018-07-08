@@ -47,6 +47,7 @@ export default {
     },
     careteNote() {
       kepperService.careteNotefromEmail(this.mail);
+      swal('email sent!');
     }
   }
 };
