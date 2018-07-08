@@ -162,6 +162,9 @@ width: 80%;
 
 
 /* todos */
+.hidden {
+    visibility: hidden;
+}
 .add-btn {
   border-radius: 50%;
   align-self: flex-start;
@@ -169,28 +172,34 @@ width: 80%;
   margin: 0 0 5px 0;
   background-color: #8bc34a;
   outline: none;
+  margin: 0 5px 0 0;
+  
 }
 .todos-main {
     width: 80%;
 }
 
-.note-todo input {
+.note-todo  .input-checkBox{
+    height: 20px;
+    width: 30px;
+    align-self: center;
+}
+.note-todo .input-text {
     border:none;
     min-width: 0;
     width: -webkit-fill-available;
     transition: all 0.3s;
     
 }
+
 .note-todo {
     background-color: var(--note-bg-color);
     width: 100%
 }
-.note-todo {
-  border-bottom: 1px solid #7e413d;
-}
 
 .note-todo>div{
     width: 100%;
+    border-bottom: 1px solid #7e413d;
 }
 
 .todos-header {
@@ -212,6 +221,12 @@ width: 80%;
     padding: 5px;
     border-bottom: 1px solid #78afb9;
     
+}
+.demo-checkbox  {
+color:#8bc34a;
+width: 20px;
+height: 20px;
+
 }
 
 /* search */
@@ -235,3 +250,65 @@ width: 80%;
         margin: 0 5px 0 0;
     }
 }
+
+
+
+/* annimta */
+
+.fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    transition: opacity 1s;
+  }
+  
+  .fade-leave {
+    /*opacity: 1;*/
+  }
+  
+  .fade-leave-active {
+    transition: opacity 1s;
+    opacity: 0;
+  }
+  
+  .slide-enter {
+    opacity: 0;
+    /*transform: translateY(20px);*/
+  }
+  
+  .slide-enter-active {
+    animation: slide-in 1s ease-out forwards;
+    transition: opacity .5s;
+  }
+  
+  
+  .slide-leave-active {
+    animation: slide-out 1s ease-out forwards;
+    transition: opacity 1s;
+    opacity: 0;
+  
+  }
+  
+  .slide-move {
+    transition: transform 1s;
+  }
+  
+  @keyframes slide-in {
+    from {
+      transform: translateY(20px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(20px);
+    }
+  }
+  

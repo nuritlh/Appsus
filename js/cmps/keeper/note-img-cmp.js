@@ -5,7 +5,7 @@ const txtTypt = 'note-prev-img';
 
 export default {
     template: `
-    <section class="flex justify-center">
+    <section class="flex justify-center animated fadeIn" >
         <div class="note-img flex-col align-center">
         <div class="input-file-container">
             <input  type="file" name="image" class="import-img input-file"

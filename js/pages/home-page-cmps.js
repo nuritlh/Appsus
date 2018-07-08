@@ -7,12 +7,20 @@ export default {
   template: `
     <section class="home-page">
         <div class="flex align-center space-around">
-            <div  class="route-box email-route flex align-center">
-                <router-link exact to="/emailApp">email</router-link>
+
+        <router-link class="route-box-link" exact to="/emailApp">
+        <div  class="route-box email-route flex align-center">
+        email
             </div>
-            <div class="route-box kepper-route flex align-center">
-                <router-link exact to="/kepperApp">kepper</router-link>
-            </div>
+      </router-link>
+          
+          
+                <router-link class="route-box-link" exact to="/kepperApp">
+                <div class="route-box kepper-route flex align-center">
+                kepper
+                </div>
+              </router-link>
+          
         </div>
     </section>
     `,

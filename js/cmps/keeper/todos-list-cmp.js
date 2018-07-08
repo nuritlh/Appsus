@@ -16,7 +16,7 @@ export default {
         </div>
      <div class="flex-col todos-main">
          <div >
-            <to-do v-for="todo in data.todosItem" :todo="todo">
+            <to-do class="animated fadeIn" v-for="todo in data.todosItem" :todo="todo">
             </to-do>
              
   </div>
@@ -57,8 +57,9 @@ export default {
           kepperService.saveTodo(null, this.data.todosItem);
         });
       } else {
-        debugger;
-        this.data.todosItem = kepperService.getTodos();
+       
+         kepperService.getTodos()
+         .then(todos=>{this.data.todosItem = todos})
       }
     },
     saveItem(data) {

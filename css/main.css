@@ -76,6 +76,12 @@ a {
 }
 
 /* --------------------helper end---------------- */
+
+.loading-gif{
+  width: 30%;
+  position: absolute;
+  left: 50vw;
+}
 .nav-in-pages {
   height: 50px;
 }
@@ -115,12 +121,13 @@ nav div a:hover {
   cursor: pointer;
 }
 
-.route-box a {
+
+.route-box-link{
   font-size: 2em;
   color: whitesmoke;
   transition: all 0.3s;
 }
-.route-box a:hover {
+.route-box-link:hover {
   color: #80413f;
 }
 .route-box:hover {
@@ -154,7 +161,7 @@ button:disabled {
   border-radius: 50%;
   background-color: whitesmoke;
   color: #e75447;
-  font-size: 1em;
+  font-size: 1.3em;
   padding: 2px;
 }
 .btn-close:hover:enabled {
@@ -163,4 +170,4 @@ button:disabled {
   color: #e75447;
 }
 
-/* annimtaion */
+

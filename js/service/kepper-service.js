@@ -79,12 +79,10 @@ function searchNote(searchInput) {
 
 function saveTodo(todo, prviewList) {
     if (!prviewList) {
-
         var currIdx = todos.findIndex(item => {
             return item.id === todo.id
         })
         todos[currIdx] = todo;
-
         var newTodo = {
             id: utils.makeid(),
             todoTitle: '',
@@ -96,7 +94,6 @@ function saveTodo(todo, prviewList) {
         debugger
         todos = prviewList
     }
-    console.log('todos temp', todos)
 }
 
 function createTodos() {
@@ -110,7 +107,7 @@ function createTodos() {
 
 function getTodos() {
     todos = createTodos()
-    return todos
+    return Promise.resolve(todos)
 }
 
 function deleteTodo(id) {

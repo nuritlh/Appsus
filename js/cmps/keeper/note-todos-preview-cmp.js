@@ -2,16 +2,17 @@ import kepperService from '../../service/kepper-service.js';
 import { eventBus, OPEN_NOTE } from '../../service/eventbus-service.js';
 
 export default {
-  props: ['data', 'id'],
+  props: ['data', 'id','isPin'],
   template: `
     <section>
-        <div class="preview-txt dynamic-cmp-item flex-col" @click="openTodosCmp" 
+        <div class="dynamic-cmp-item flex-col" @click="openTodosCmp" 
         :style="{backgroundColor:defulteColor}">
         <div class="flex space-between">
-                <div>
+        <div>
                <button class="fas fa-trash-alt" @click.stop="deleteNote"></button>
-               <button class="btn-pin fas fa-thumbtack" :class="{pinActive:isNotePin}" @click.stop="pinNote"></button>
+               <button  :class="{pinActive:isNotePin}" class="btn-pin fas fa-thumbtack" @click.stop="pinNote"></button>
                </div>
+              
             <i class="fas fa-pencil-alt"></i>
            </div>
         <h1>{{data.titelNote}}</h1>
@@ -19,7 +20,10 @@ export default {
             <li v-for="todo in data.todosItem">
             <div class="flex space-between">
                <p>{{todo.todoTitle}}</p>
-             <input :disabled="true" :value="todo.isChecked"  type="checkbox" />
+               <div :class="{hidden:!todo.isChecked}" class="demo-checkbox">
+               <i class="fas fa-check-circle"></i>
+               </div>
+             <!-- <input :disabled="true" :value="todo.isChecked"  type="checkbox" /> -->
             </div>
           </li>
         </ul>
@@ -41,6 +45,7 @@ export default {
     isNotePin() {
       return this.isPin;
     }
+  
   },
   methods: {
     openTodosCmp() {

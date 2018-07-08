@@ -5,13 +5,13 @@ import kepperService from '../../service/kepper-service.js'
 export default {
    props:['dataNote'],
     template:`
-    <section class="flex justify-center" @click.native="openTxtCmp">
+    <section class="flex justify-center animated fadeIn" @click.native="openTxtCmp">
         <div class="flex-col note-txt-container">
         <input class="note-txt-item" autoFocus  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
        
         <input class="note-txt-item" type="text" v-model="data.noteTxt" placeholder="Your note">
 </input>
-        <button :class="[isEdit?'far fa-save':'fas fa-plus-circle']" @click="addTxtNote">
+        <button class="far fa-save" @click="addTxtNote">
         </button>
         
         </div>

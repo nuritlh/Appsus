@@ -26,14 +26,13 @@ export default {
        <router-view v-if="newNoteShow">
         </router-view>
     <div v-else  class="dynamic-cmp flex">
-    <component v-if="cmps" v-for="(cmp, idx) in cmps" :is="cmp.type" :key="idx" 
+      <!-- <img :class="{hidden:load}" class="loading-gif" src="img/main/loading.gif"> -->
+    <component    v-if="cmps" v-for="(cmp, idx) in cmps" :is="cmp.type" :key="idx" 
        :id="cmp.id"
        :isPin = "cmp.pinNote"
        @notePin="sortByPin"
        :data="cmp.data">
-         
         </component> 
-  
     </div>
 
     </section>
@@ -42,7 +41,8 @@ export default {
     return {
       newNoteShow: false,
       btnclass: '',
-      cmps: null
+      cmps: null,
+      load:true
     };
   },
   created() {
@@ -53,7 +53,7 @@ export default {
     kepperService.query().then(notes => {
       if (notes) {
         this.cmps = notes;
-        console.log('cmps', this.cmps);
+        this.load = false
       }
     });
     eventBus.$on(OPEN_NOTE, url => {
