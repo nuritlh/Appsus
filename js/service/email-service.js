@@ -1,12 +1,19 @@
-var emails = [
-  {
-    id: 12345,
-    from: 'bezeq',
-    email: 'bezeq_mail@bezeq.co.il',
-    title:
-      'Dear customer - your account is here and the trees remain in the forest',
-    bodtMsg: {
-      txt: `This email is sent automatically and can not be answered
+import utils from './utils.js';
+
+var emails = null;
+if (utils.loadFromStorage('emails')) {
+  emails = utils.loadFromStorage('emails');
+  removeChecked();
+} else {
+  emails = [
+    {
+      id: 12345,
+      from: 'bezeq',
+      email: 'bezeq_mail@bezeq.co.il',
+      title:
+        'Dear customer - your account is here and the trees remain in the forest',
+      bodtMsg: {
+        txt: `This email is sent automatically and can not be answered
         If you are unable to view the invoice, you must download and install Acrobat Reader
         Please note that the invoice is a computerized document signed with an approved electronic signature as defined in the Law
         For an explanation of the octaronic signature click here`,
@@ -253,27 +260,49 @@ var emails = [
       Activity Address: 301 Abba Hillel Silver, Ramat Gan 
       Arrival instructions:
       `,
-      imgURL: 'img/email/Funzing.PNG'
-    },
-    dateSent: '2018-06-13'
-  }
-];
+        imgURL: 'img/email/Funzing.PNG'
+      },
+      dateSent: '2016-06-23',
+      isRead: true,
+      isMarked: false
+    }
+  ];
+  utils.saveToStorage('emails', emails);
+}
 
-function query(filter) {
-  return Promise.resolve(emails);
-  //   return Promise.resolve(emails).then(res => {
-  //     var emails = res;
-  //     if (!filter) return emails;
-  //     var emails = emails.filter(book => {
-  //       return (
-  //         book.title.indexOf(filter.name) !== -1 &&
-  //         book.listPrice.amount >= filter.fromPrice &&
-  //         book.listPrice.amount <= toprice
-  //       );
-  //     });
+var sentEmails = [];
+if (utils.loadFromStorage('sentEmails'))
+  sentEmails = utils.loadFromStorage('sentEmails');
 
-  //     return emails;
-  //   });
+var draftsEmails = [];
+if (utils.loadFromStorage('draftsEmails'))
+  draftsEmails = utils.loadFromStorage('draftsEmails');
+
+var checkedEmails = [];
+
+function removeChecked() {
+  emails.forEach(email => {
+    email.isMarked = false;
+  });
+  checkedEmails = [];
+}
+
+function query(searchEmail) {
+  return Promise.resolve(emails).then(res => {
+    var emails = res;
+    if (!searchEmail) return emails;
+    var emails = emails.filter(email => {
+      return (
+        email.from.toLowerCase().includes(searchEmail.toLowerCase()) ||
+        email.email.toLowerCase().includes(searchEmail.toLowerCase()) ||
+        email.title.toLowerCase().includes(searchEmail.toLowerCase())
+      );
+    });
+      return emails;
+    });
+}
+function gatSentEmails() {
+  return Promise.resolve(sentEmails);
 }
 
 function getEmailByID(emailId) {
@@ -281,14 +310,163 @@ function getEmailByID(emailId) {
   return Promise.resolve(email);
 }
 function deleteEmail(emailId) {
-  // getEmailByID(emailId).then(email => {
-  //   book.reviews.splice(idx, 1);
-  //   utils.saveToStorage('books', apiBooks);
-  // });
+  var emailIdx = emails.findIndex(email => email.id === emailId);
+  emails.splice(emailIdx, 1);
+  utils.saveToStorage('emails', emails);
+  return Promise.resolve('deleted!');
+}
+function updateMark(mailId) {
+  emails.forEach(email => {
+    if (email.id === mailId) {
+      email.isMarked = !email.isMarked;
+      if (email.isMarked) {
+        var isCheked = checkedEmails.find(id => id === email.id);
+        if (isCheked === undefined) checkedEmails.push(email.id);
+      } else {
+        var isChekedidx = checkedEmails.findIndex(id => id === email.id);
+        if (isChekedidx !== -1) checkedEmails.splice(isChekedidx, 1);
+      }
+    }
+  });
+  console.log(checkedEmails);
+}
+function deleteMarkedEmails() {
+  checkedEmails.forEach(emailId => {
+    emails.forEach((email, idx) => {
+      if (emailId === email.id) {
+        emails.splice(idx, 1);
+      }
+    });
+  });
+  utils.saveToStorage('emails', emails);
+}
+function saveSentEmails(newMail) {
+  var name = newMail.email.substr(0, newMail.email.indexOf('@'));
+  var newEMail = {
+    id: Date.now(),
+    from: name,
+    email: newMail.email,
+    title: newMail.title,
+    bodtMsg: {
+      txt: newMail.bodtMsg.txt ? newMail.bodtMsg.txt : '',
+      imgURL: newMail.bodtMsg.imgURL
+    },
+    dateSent: utils.getCurrDate(),
+    isRead: false,
+    isMarked: false
+  };
+  sentEmails.unshift(newEMail);
+  utils.saveToStorage('sentEmails', sentEmails);
+
+  return Promise.resolve(sentEmails);
+}
+function getUnreadEmails() {
+  var unreadEmails = emails.filter(email => {
+    return email.isRead === false;
+  });
+
+  return Promise.resolve(unreadEmails);
+}
+function getTotalMailsNum() {
+  return Promise.resolve(emails.length);
+}
+function updateUnreadEmail(emailId) {
+  if (emailId) {
+    emails.forEach(email => {
+      if (email.id === emailId) email.isRead = !email.isRead;
+    });
+  } else {
+    checkedEmails.forEach(id => {
+      emails.forEach(email => {
+        if (id === email.id) {
+          email.isRead = false;
+        }
+      });
+    });
+  }
+  utils.saveToStorage('emails', emails);
+  return Promise.resolve();
+}
+function updatedReadEmail() {
+  checkedEmails.forEach(id => {
+    emails.forEach(email => {
+      if (id === email.id) {
+        email.isRead = true;
+      }
+    });
+  });
+
+  utils.saveToStorage('emails', emails);
+  return Promise.resolve();
+}
+function filterBy(filter) {
+  return Promise.resolve(emails).then(res => {
+    var emails = res;
+    if (filter === 'all') return emails;
+    var emails = emails.filter(email => {
+      if (filter === 'read') {
+        return email.isRead === true;
+      } else if (filter === 'unread') {
+        return email.isRead === false;
+      }
+    });
+
+    return emails;
+  });
+}
+function sortBy(sort) {
+  if (sort === 'date') {
+    emails.sort(function(a, b) {
+      return a.dateSent < b.dateSent ? 1 : b.dateSent < a.dateSent ? -1 : 0;
+    });
+  } else if (sort === 'subject') {
+    emails.sort(function(a, b) {
+      return a.title > b.title ? 1 : b.title > a.title ? -1 : 0;
+    });
+  }
+  return Promise.resolve(emails);
+}
+function saveToDrafts(draftEmail) {
+  var draft = {
+    id: Date.now(),
+    from: draftEmail.email,
+    email: draftEmail.email,
+    title: draftEmail.title,
+    bodtMsg: {
+      txt: draftEmail.bodtMsg.txt ? draftEmail.bodtMsg.txt : '',
+      imgURL: draftEmail.bodtMsg.imgURL
+    },
+    dateSent: utils.getCurrDate(),
+    isRead: false,
+    isMarked: false
+  };
+  draftsEmails.push(draft);
+  utils.saveToStorage('draftsEmails', draftsEmails);
+  console.log('draftsEmails', draftsEmails);
+
+  return Promise.resolve(draft);
+}
+function gatDraftsEmails() {
+  console.log(draftsEmails);
+
+  return Promise.resolve(draftsEmails);
 }
 
 export default {
   query,
+  gatSentEmails,
   getEmailByID,
-  deleteEmail
+  deleteEmail,
+  updateMark,
+  deleteMarkedEmails,
+  saveSentEmails,
+  getUnreadEmails,
+  getTotalMailsNum,
+  updateUnreadEmail,
+  filterBy,
+  sortBy,
+  updatedReadEmail,
+  removeChecked,
+  saveToDrafts,
+  gatDraftsEmails
 };
