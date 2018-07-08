@@ -5,9 +5,9 @@ import kepperService from '../../service/kepper-service.js'
 export default {
    props:['dataNote'],
     template:`
-    <section @click.native="openTxtCmp">
-        <div class="flex-col">
-        <input class="note-txt-item"  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
+    <section class="flex justify-center" @click.native="openTxtCmp">
+        <div class="flex-col note-txt-container">
+        <input class="note-txt-item" autoFocus  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
        
         <input class="note-txt-item" type="text" v-model="data.noteTxt" placeholder="Your note">
 </input>
@@ -47,9 +47,7 @@ export default {
               this.data.noteTxt = note.data.noteTxt 
           })
         }
-       
-        console.log('idd',this.$route.params.textNoteId)
-        
+               
     },
     methods :{
         addTxtNote(){
@@ -62,6 +60,7 @@ export default {
                 kepperService.addNote(txtTypt,this.data,this.noteEdit)
                 .then(()=>{
                     swal("your note added to the list");
+                  
                 })
             }
         }

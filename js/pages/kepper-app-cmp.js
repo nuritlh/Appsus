@@ -5,11 +5,8 @@ import noteTodos from '../cmps/keeper/todos-list-cmp.js'
 import todosPrevList from '../cmps/keeper/note-todos-preview-cmp.js'
 import searchNote from '../cmps/keeper/search-note-cmp.js'
 
-// import { eventBus, EVENT_SHRINK_NAV,
-//     OPEN_NOTE } from '../service/event-bus-service.js';
 
-import eventBus, { OPEN_NOTE } from '../service/event-bus-service.js'
-
+import eventBus, { OPEN_NOTE } from '../service/event-bus.service.js'
 
 export default {
 
@@ -17,7 +14,8 @@ export default {
     <section class="kepper-app">
         <search-note @search="searchNote">
         </search-note>
-       <ul class="clean-list flex">
+     
+       <ul class="clean-list flex justify-center kepper-haeader">
        <li><button v-if="newNoteShow" class="fas fa-times-circle btn-close"  @click="closeCmp"></button></li>
            <li><button class="far fa-file-alt btn-keep" ref="textNote" @click="goTo('textNote')"></button></li>
            <li><button class="fas fa-image btn-keep" @click="goTo('imgNote')"></button></li>
@@ -28,10 +26,12 @@ export default {
     <div v-else  class="dynamic-cmp flex">
     <component v-if="cmps" v-for="(cmp, idx) in cmps" :is="cmp.type" :key="idx" 
        :id="cmp.id"
+       :isPin = "cmp.pinNote"
+       @notePin="sortByPin"
        :data="cmp.data">
          
         </component> 
-
+  
     </div>
 
     </section>
@@ -40,7 +40,7 @@ export default {
         return {
             newNoteShow: false,
             btnclass: '',
-            cmps: null
+            cmps: null,
         }
     },
     created() {
@@ -59,6 +59,9 @@ export default {
             this.$router.push(url)
         })
     },
+    computed:{
+ 
+    },
     methods: {
         goTo(url) {
             console.log(this.$refs)
@@ -71,15 +74,21 @@ export default {
             this.newNoteShow = false
         },
         searchNote(searchInput) {
-          
+            debugger
                 kepperService.searchNote(searchInput)
                     .then(res => {
-                        console.log(res)
                         this.cmps = res
                     })
-          
-           
+        },
+        sortByPin(noteId){
+            
+                kepperService.addPinToNote(noteId);
 
+                kepperService.sortByPinNote()
+                .then(res=>{
+                    this.cmps = res
+                })
+           
         }
 
     },

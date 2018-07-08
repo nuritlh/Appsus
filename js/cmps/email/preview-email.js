@@ -1,21 +1,11 @@
-import emailService from '../../service/email-service.js';
-import   eventBus, {
-
-  EVENT_DISPLAY_FILTER_ICONS
-} from '../../service/event-bus-service.js';
-
 export default {
   props: ['mail'],
   template: `
-      <section :class="{'unread':!mail.isRead}">
+      <section>
             <div class="pre-email flex" @click="openEmail">
-            <label class="per-checkbox" ><input @click.stop="markEmail" type="checkbox" :checked="checkedValue" ></label>
                 <h4>{{mail.from}}</h4><p>{{title}}<span> {{txt}}</span></p>
-                <div class="pre-right flex">
-                <div class="pre-email-date">{{mail.dateSent}}</div>
-                  <span class="pre-email-icon" @click.stop="deleteEmail"><i class="fas fa-trash-alt"></i></span>
-                  <span class="pre-email-icon" @click.stop=""><i class="far fa-clock"></i></span>
-                </div>
+                <span class="pre-email-icon" @click.stop="deleteEmail"><i class="fas fa-trash-alt"></i></span>
+                <span class="pre-email-icon"><i class="far fa-clock"></i></span>
             </div>
       </section>
       `,
@@ -25,21 +15,17 @@ export default {
     },
     txt: function() {
       return this.mail.bodtMsg.txt.substring(0, 50);
-    },
-    checkedValue: function() {
-      return this.mail.isMarked;
     }
   },
   methods: {
     openEmail() {
+      console.log('premail', this.mail);
+      //   this.$router.push(`/email/${this.mail.id}`);
       this.$emit('selected', this.mail);
-      eventBus.$emit(EVENT_DISPLAY_FILTER_ICONS);
+      console.log('prebook', this.mail);
     },
     deleteEmail() {
       this.$emit('deleteEmail', this.mail);
-    },
-    markEmail($event) {
-      emailService.updateMark(this.mail.id);
     }
   }
 };

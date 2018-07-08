@@ -1,18 +1,18 @@
-// import { eventBus, OPEN_NOTE } from '../../service/event-bus-service.js';
-import eventBus, { OPEN_NOTE } from '../../service/event-bus-service.js'
-
-// import eventBus, { OPEN_NOTE } from '../../service/event-bus-service.js'
+import eventBus, { OPEN_NOTE } from '../../service/event-bus.service.js'
 import kepperService from '../../service/kepper-service.js';
 
 export default {
-  props: ['data', 'id'],
-  template: `
+    props: ['data', 'id','isPin'],
+    template: `
      <section class="preview-note-txt">
-       <div class="preview-txt dynamic-cmp-item flex-col" @click="openTxtCmp">
+       <div class="preview-txt dynamic-cmp-item flex-col" @click="openTxtCmp"
+        :style="{backgroundColor:defulteColor}">
            <div class="flex space-between">
-           <button class="fas fa-trash-alt" @click.stop="deleteNote"></button>
-       <i class="fas fa-pencil-alt"></i>
-    
+               <div>
+               <button class="fas fa-trash-alt" @click.stop="deleteNote"></button>
+               <button class="btn-pin fas fa-thumbtack" :class="{pinActive:isNotePin}" @click.stop="pinNote"></button>
+               </div>
+       <i class="fas fa-pencil-alt"></i>        
            </div>
     <div>
         <h1>{{data.titelNote}}</h1>
@@ -25,16 +25,21 @@ export default {
        </div>
          
      </section>
-     
      `,
-  created() {
-    console.log('data from pre', this.data);
-  },
-  methods: {
-    openTxtCmp() {
-      var urlTo = `/kepperApp/textNote/${this.id}`;
-      this.$router.push(urlTo);
-      eventBus.$emit(OPEN_NOTE, urlTo);
+      data(){
+          return {
+            defulteColor:'whitesmoke',
+          }
+     },
+    
+    created() {
+        console.log('data from pre', this.data)
+    },
+    computed:{
+        isNotePin(){
+            return this.isPin
+        }
+        
     },
     methods: {
         openTxtCmp() {
@@ -50,7 +55,16 @@ export default {
         },
         changeColor(){
             kepperService.setColor()
+            .then((value) => {
+                if (value) {
+                    this.defulteColor = value
+                } else {
+                    this.defulteColor = this.defulteColor
+                }
+            });
+        },
+        pinNote(){
+            this.$emit('notePin',this.id)
         }
     }
-  }
-};
+}
