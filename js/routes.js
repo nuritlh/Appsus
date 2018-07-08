@@ -1,10 +1,13 @@
-import emailApp from './pages/email-app-cmp.js';
-import kepperApp from './pages/kepper-app-cmp.js';
-import homePage from './pages/home-page-cmps.js';
-import noteTxt from './cmps/keeper/note-txt-cmp.js';
-import noteImg from './cmps/keeper/note-img-cmp.js';
-import todos from './cmps/keeper/todos-list-cmp.js';
 
+import emailApp from './pages/email-app-cmp.js'
+import kepperApp from './pages/kepper-app-cmp.js'
+import homePage from './pages/home-page-cmps.js'
+import noteTxt from './cmps/keeper/note-txt-cmp.js'
+import noteImg from './cmps/keeper/note-img-cmp.js'
+import todos from './cmps/keeper/todos-list-cmp.js'
+
+
+ 
 export default [
             {path: '/',component:homePage},
             {path: '/emailApp', component: emailApp},

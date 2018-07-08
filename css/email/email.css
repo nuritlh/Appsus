@@ -26,7 +26,7 @@ body {
   font-weight: 600;
   font-style: italic;
   border-radius: 15px;
-  border: 2px solid #46515b;
+  border: 2px solid #5183a2;
 }
 .tools-emails-bar {
   display: flex;
@@ -60,9 +60,7 @@ body {
 }
 
 /*-------------pre-email-----------------------*/
-.unread {
-  font-weight: bold;
-}
+
 .pre-email {
   border-bottom: 1px solid gray;
   cursor: pointer;
@@ -91,20 +89,14 @@ body {
   display: inline-flex;
 }
 .pre-email p {
-  width: 80%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  width: 85%;
 }
 .pre-email p span {
   font-size: 12px;
 }
-.pre-right {
-  margin: 0 0 0 10px;
-}
 .pre-email-icon {
   padding: 5px;
-  cursor: pointer;
+  /* display: none; */
 }
 
 .back-icon:hover,
@@ -113,13 +105,6 @@ body {
   background-color: gray;
   border-radius: 50%;
   opacity: 0.3;
-}
-.pre-email-date {
-  font-size: 12px;
-  align-self: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 /*------------------email-details---------------------*/

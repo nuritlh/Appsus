@@ -1,5 +1,4 @@
 import previewEmail from './preview-email.js';
-
 export default {
   props: ['mails'],
 
@@ -11,10 +10,10 @@ export default {
       </section>
       `,
   components: { previewEmail },
-
   methods: {
     selectedEmail(email) {
       this.$emit('selected', email);
+      console.log('listemail', email);
     },
     deleteEmail(email) {
       this.$emit('deleteEmail', email);

@@ -74,9 +74,6 @@ button {
 a {
   text-decoration: none;
 }
-.deplay-none {
-  display: none;
-}
 
 /* --------------------helper end---------------- */
 
@@ -89,9 +86,6 @@ nav {
   background-repeat: no-repeat;
   background-size: cover;
   height: 200px;
-}
-.nav-in-pages {
-  height: 50px;
 }
 
 nav div {
@@ -140,15 +134,15 @@ nav div a:hover{
 button {
     background-color: #96584a;
     border: none;
-    color: #e6c5a3;
+    color: #f7efe5;
     padding: 10px;
     font-size: 1.1em;
-    transition: all 0.3s;
+    transition: box-shadow 0.3s,color 0.3s;
 }
 button:hover:enabled ,button:active {
     color: #faf4eb;
     box-shadow: 0 0 12px 0px black;
-    font-size: 1.2em;
+    /* font-size: 1.2em; */
 }
 button:disabled {
   opacity: 0.4;
@@ -161,10 +155,13 @@ button:disabled {
   padding: 2px;
 
 }
-.btn-close:hover {
+.btn-close:hover:enabled {
   box-shadow: 0 0 12px 0px black;
   font-size: 1.2em;
   color: #e75447;
 
 
 }
+
+/* annimtaion */
+

@@ -4,11 +4,17 @@ import kepperService from '../../service/kepper-service.js'
 const txtTypt = 'note-prev-img';
 
 export default {
-  template: `
+    template: `
     <section class="flex justify-center">
         <div class="note-img flex-col align-center">
-        <img class="note-img-item" :src="data.url">
-        <input class="note-img-item"  name="titel" type="text" v-model="data.titelNote" placeholder="Title"/>
+        <div class="input-file-container">
+            <input  type="file" name="image" class="import-img input-file"
+            @input="hendleFileSelected" multiple="false" accept="image/*" />
+            <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
+                    </div>
+        <img class="note-img-item" ref="imgToUpload" :src="data.url">
+        <input autoFocus class="note-img-item"  name="titel"
+         type="text" v-model="data.titelNote" placeholder="Title"/>
         <button  :class="[isEdit?'far fa-save':'fas fa-plus-circle']" 
         class="note-img-item" @click="addImgNote"></button>
         </div>
@@ -21,17 +27,18 @@ export default {
                 titelNote: '',
                 url: ''
             },
+            noteEdit:null,
             isEdit:false,
+            noteId:this.$route.params.textNoteId
         }
     },
     mounted(){
-        var randomNum = utils.getRandomInteger(100,1000)
-        this.data.url = `https://picsum.photos/200/300/?image=${randomNum}`
         var noteId  = this.$route.params.textNoteId
 
         if(noteId) {
             kepperService.findNoteById(noteId)
            .then(note=>{
+            this.noteEdit = note
              this.isEdit = !this.isEdit
                this.data.titelNote = note.data.titelNote 
                this.data.url = note.data.url 
@@ -41,14 +48,36 @@ export default {
     methods: {
     
         addImgNote() {
-            var note = this.data;
-            if (this.data.titelNote !== '' || this.data.url !== '') {
-                kepperService.addNote(txtTypt, note)
-                    .then(() => {
-                        swal("your note added to the list");
-                    })
+            if(this.noteEdit) {
+                this.noteEdit.data = this.data;
             }
+            if(this.data.titelNote !== '' || this.data.url !== '' ){
+                
+                kepperService.addNote(txtTypt,this.data,this.noteEdit)
+                .then(()=>{
+                    swal("your note added to the list");
+                 
+                })
+            }
+        },
+        hendleFileSelected(ev){
+            console.log('jojoj')
+            var files = ev.target.files;
+            var reader = new FileReader();
+            // var then = this;
+            var urlUpload = ''
+            reader.onload = ( (file)=>{
+                return ((e)=>{
+                    urlUpload = e.target.result
+                    this.data.url = urlUpload
+                })
+
+            }) (files[0])
+            reader.readAsDataURL(files[0])
+            console.log(urlUpload)
+            
         }
-    
-  }
-};
+        
+    }
+
+}
