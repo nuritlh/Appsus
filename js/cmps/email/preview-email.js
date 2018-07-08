@@ -3,6 +3,7 @@ import {
   eventBus,
   EVENT_DISPLAY_FILTER_ICONS
 } from '../../service/eventbus-service.js';
+import kepperService from '../../service/kepper-service.js';
 
 export default {
   props: ['mail'],
@@ -45,7 +46,7 @@ export default {
       emailService.updateMark(this.mail.id);
     },
     careteNote() {
-      emailService.careteNotefromEmail(this.mail);
+      kepperService.careteNotefromEmail(this.mail);
     }
   }
 };

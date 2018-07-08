@@ -489,9 +489,38 @@ function gatDraftsEmails() {
   return Promise.resolve(draftsEmails);
 }
 
-function careteNotefromEmail(email) {}
 //send mail to noteApp
-function createEmailFromNote(note) {}
+function createEmailFromNote(note) {
+  var email = {
+    id: Date.now(),
+    from: 'me',
+    email: 'me@me.com',
+    title: note.titelNote,
+    dateSent: utils.getCurrDate(),
+    isRead: false,
+    isMarked: false
+  };
+
+  if (!note.todosItem) {
+    email.bodtMsg = {
+      txt: note.noteTxt ? note.noteTxt : '',
+      imgURL: note.url
+    };
+  } else {
+    var str = ``;
+    note.todosItem.forEach(todo => {
+      var idDone = todo.isChecked ? 'Done' : 'In Process';
+
+      str += todo.todoTitle + ' ' + idDone + ',';
+    });
+    email.bodtMsg = {
+      txt: str,
+      imgURL: note.url
+    };
+  }
+  emails.unshift(email);
+  utils.saveToStorage('emails', emails);
+}
 
 export default {
   query,
@@ -510,6 +539,5 @@ export default {
   removeChecked,
   saveToDrafts,
   gatDraftsEmails,
-  careteNotefromEmail,
   createEmailFromNote
 };
