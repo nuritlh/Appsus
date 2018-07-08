@@ -24,6 +24,16 @@ flex-wrap: wrap;
 .note-to-email{
     align-self: flex-end;
 }
+.span-btn {
+    padding:5px;
+    background-color: transparent;
+    color:#96584a;
+}
+.span-btn:hover:enabled{
+    color:#cfa78a;
+    box-shadow: none;
+
+}
 
 .btn-keep {
     min-width: 50px;
@@ -46,11 +56,14 @@ flex-wrap: wrap;
 .btn-color {
     align-self: flex-start;
     color:var(--noteBtn-color);
-    background-color: white;
+    background-color: transparent;
 }
 
 .btn-color:hover:enabled {
     color:var(--noteBtn-color);
+    box-shadow: none;
+    color:#cfa78a;
+
 }
 
 .input-color {
@@ -66,10 +79,10 @@ flex-wrap: wrap;
     cursor: pointer;
     min-width: 150px;
 }
-.dynamic-cmp-item > div {
-  margin: 0 0 10px;
-}
 
+.note-btns{
+    margin: 0;
+}
 div .dynamic-cmp-item:hover {
     transform: scale(1.05);
 }
@@ -182,6 +195,12 @@ width: 80%;
     width: 80%;
 }
 
+.todos-container {
+margin: 0 0 10px;
+}
+.save-todo-btn{
+    width: 30%
+}
 .note-todo  .input-checkBox{
     height: 20px;
     width: 30px;

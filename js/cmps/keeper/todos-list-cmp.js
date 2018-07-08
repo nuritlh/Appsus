@@ -11,14 +11,15 @@ export default {
         <div class="flex todos-header">
             <input  name="titel" autoFocus type="text" v-model="data.titelNote" 
             placeholder="Todos"/>
-            <button :disabled="(!data.todosItem.length > 0)" class="far fa-save" @click="addTodosNote">
-            </button>
         </div>
      <div class="flex-col todos-main">
-         <div >
+         <div class="todos-container">
             <to-do class="animated fadeIn" v-for="todo in data.todosItem" :todo="todo">
             </to-do>
-             
+  </div>
+  <div class="flex justify-center">
+  <button :disabled="(!data.todosItem.length > 0)" class="far fa-save save-todo-btn" @click="addTodosNote">
+            </button>
   </div>
 
   </div>

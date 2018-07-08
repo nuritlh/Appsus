@@ -17,7 +17,7 @@ export default {
           
                 <router-link class="route-box-link" exact to="/kepperApp">
                 <div class="route-box kepper-route flex align-center">
-                kepper
+                keeper
                 </div>
               </router-link>
           

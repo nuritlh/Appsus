@@ -10,7 +10,6 @@ export default {
         :style="{backgroundColor:defulteColor}">
         <div class="flex space-between">
         <div>
-               <button class="fas fa-trash-alt" @click.stop="deleteNote"></button>
                <button  :class="{pinActive:isNotePin}" class="btn-pin fas fa-thumbtack" @click.stop="pinNote"></button>
                </div>
               
@@ -31,9 +30,11 @@ export default {
             <button class="btn-color" @click.stop="changeColor">
             <i class="fas fa-palette"></i>
             </button>
-            <span title="send to your mail" @click.stop="sendAsEmail" class="pre-email-icon note-to-email">
+            <button class="fas fa-trash-alt span-btn" @click.stop="deleteNote"></button>
+
+            <button title="send to your mail" @click.stop="sendAsEmail" class="span-btn" >
             <i class="fas fa-envelope"></i>
-            </span>
+              </button>
             </div>
         </div>
     </section>
