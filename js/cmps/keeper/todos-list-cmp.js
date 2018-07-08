@@ -1,5 +1,5 @@
 import toDo from '../keeper/note-todo-cmp.js';
-import utilsService from '../../service/utils.js';
+import { eventBus, CLOSE_NOTE } from '../../service/eventbus-service.js';
 import kepperService from '../../service/kepper-service.js';
 
 const todosTypt = 'todos-prev-list';
@@ -77,7 +77,8 @@ export default {
     },
     addTodosNote() {
       kepperService.addNote(todosTypt, this.data, this.noteEdit).then(() => {
-        swal('your todos added to the list');
+        swal("your note added to the list");
+        setTimeout(function (){eventBus.$emit(CLOSE_NOTE,true)},800)
         kepperService.createTodos();
       });
     },

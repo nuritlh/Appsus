@@ -5,7 +5,7 @@ import emailService from '../../service/email-service.js';
 export default {
   props: ['data', 'id', 'isPin'],
   template: `
-    <section>
+    <section class="item">
         <div class="dynamic-cmp-item flex-col" @click="openTodosCmp" 
         :style="{backgroundColor:defulteColor}">
         <div class="flex space-between">

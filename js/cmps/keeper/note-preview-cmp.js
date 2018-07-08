@@ -5,7 +5,7 @@ import emailService from '../../service/email-service.js';
 export default {
   props: ['data', 'id', 'isPin'],
   template: `
-     <section class="preview-note-txt">
+     <section class="preview-note-txt item">
        <div class="preview-txt dynamic-cmp-item flex-col" @click="openTxtCmp"
         :style="{backgroundColor:defulteColor}">
            <div class="flex space-between">
